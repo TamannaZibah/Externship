@@ -1,0 +1,2233 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LIT Externship Program - Interactive Workbook &amp; Portal</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & Playfair for Certificate -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:ital,wght@0,600;0,700;1,400&amp;family=Caveat:wght@600&amp;display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest" crossorigin="anonymous"></script>
+  <!-- Canvas Confetti for Celebration -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" crossorigin="anonymous"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            lit: {
+              navy: '#002B66',       /* LIT Primary Deep Navy */
+              blue: '#0B4EA2',       /* LIT Vibrant Royal Blue */
+              lightBlue: '#E8F1FC',  /* LIT Soft Blue Tint */
+              red: '#C8102E',        /* LIT Cardinal Red */
+              redLight: '#FDECEF',   /* LIT Red Accent Tint */
+              gold: '#D97706',       /* Accent Badge Gold */
+              slate: '#1E293B',
+              surface: '#F8FAFC'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+            cinzel: ['Cinzel', 'serif'],
+            handwriting: ['Caveat', 'cursive']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #certificate-modal, #printable-certificate, #printable-certificate * {
+        visibility: visible;
+      }
+      #printable-certificate {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none !important;
+        border: none !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+    
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    
+    .cert-frame {
+      border: 8px double #002B66;
+      outline: 2px solid #C8102E;
+      outline-offset: -12px;
+    }
+  </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:Inter, sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0px}.-bottom-10{bottom:-2.5rem}.-right-10{right:-2.5rem}.-top-3{top:-0.75rem}.bottom-5{bottom:1.25rem}.right-0{right:0px}.right-5{right:1.25rem}.right-6{right:1.5rem}.top-0{top:0px}.top-4{top:1rem}.z-10{z-index:10}.z-40{z-index:40}.z-50{z-index:50}.m-3{margin:0.75rem}.mx-auto{margin-left:auto;margin-right:auto}.my-4{margin-top:1rem;margin-bottom:1rem}.my-auto{margin-top:auto;margin-bottom:auto}.-mb-1{margin-bottom:-0.25rem}.mb-1{margin-bottom:0.25rem}.mb-2{margin-bottom:0.5rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.ml-1{margin-left:0.25rem}.ml-2{margin-left:0.5rem}.mt-0\.5{margin-top:0.125rem}.mt-1{margin-top:0.25rem}.mt-10{margin-top:2.5rem}.mt-12{margin-top:3rem}.mt-2{margin-top:0.5rem}.mt-3{margin-top:0.75rem}.mt-4{margin-top:1rem}.mt-6{margin-top:1.5rem}.mb-1\.5{margin-bottom:0.375rem}.block{display:block}.inline-block{display:inline-block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-0\.5{height:0.125rem}.h-10{height:2.5rem}.h-12{height:3rem}.h-16{height:4rem}.h-2{height:0.5rem}.h-2\.5{height:0.625rem}.h-20{height:5rem}.h-3{height:0.75rem}.h-3\.5{height:0.875rem}.h-4{height:1rem}.h-5{height:1.25rem}.h-6{height:1.5rem}.h-64{height:16rem}.h-8{height:2rem}.h-\[500px\]{height:500px}.h-full{height:100%}.h-px{height:1px}.h-7{height:1.75rem}.min-h-screen{min-height:100vh}.w-10{width:2.5rem}.w-12{width:3rem}.w-16{width:4rem}.w-2\.5{width:0.625rem}.w-20{width:5rem}.w-3{width:0.75rem}.w-3\.5{width:0.875rem}.w-32{width:8rem}.w-4{width:1rem}.w-44{width:11rem}.w-5{width:1.25rem}.w-6{width:1.5rem}.w-64{width:16rem}.w-8{width:2rem}.w-\[500px\]{width:500px}.w-full{width:100%}.w-7{width:1.75rem}.min-w-\[280px\]{min-width:280px}.max-w-2xl{max-width:42rem}.max-w-3xl{max-width:48rem}.max-w-4xl{max-width:56rem}.max-w-7xl{max-width:80rem}.max-w-full{max-width:100%}.max-w-md{max-width:28rem}.max-w-sm{max-width:24rem}.max-w-xl{max-width:36rem}.flex-1{flex:1 1 0%}.flex-shrink-0{flex-shrink:0}.translate-y-20{--tw-translate-y:5rem;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.translate-y-0{--tw-translate-y:0px;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.transform{transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.cursor-pointer{cursor:pointer}.cursor-text{cursor:text}.select-none{-webkit-user-select:none;user-select:none}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:0.25rem}.gap-1\.5{gap:0.375rem}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.overflow-y-auto{overflow-y:auto}.rounded{border-radius:0.25rem}.rounded-2xl{border-radius:1rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-xl{border-radius:0.75rem}.rounded-t-lg{border-top-left-radius:0.5rem;border-top-right-radius:0.5rem}.border{border-width:1px}.border-4{border-width:4px}.border-b{border-bottom-width:1px}.border-b-2{border-bottom-width:2px}.border-b-4{border-bottom-width:4px}.border-t{border-top-width:1px}.border-dashed{border-style:dashed}.border-amber-200{--tw-border-opacity:1;border-color:rgb(253 230 138 / var(--tw-border-opacity, 1))}.border-amber-500{--tw-border-opacity:1;border-color:rgb(245 158 11 / var(--tw-border-opacity, 1))}.border-amber-600{--tw-border-opacity:1;border-color:rgb(217 119 6 / var(--tw-border-opacity, 1))}.border-blue-200{--tw-border-opacity:1;border-color:rgb(191 219 254 / var(--tw-border-opacity, 1))}.border-lit-blue{--tw-border-opacity:1;border-color:rgb(11 78 162 / var(--tw-border-opacity, 1))}.border-lit-red{--tw-border-opacity:1;border-color:rgb(200 16 46 / var(--tw-border-opacity, 1))}.border-slate-100{--tw-border-opacity:1;border-color:rgb(241 245 249 / var(--tw-border-opacity, 1))}.border-slate-200{--tw-border-opacity:1;border-color:rgb(226 232 240 / var(--tw-border-opacity, 1))}.border-slate-300{--tw-border-opacity:1;border-color:rgb(203 213 225 / var(--tw-border-opacity, 1))}.border-slate-700{--tw-border-opacity:1;border-color:rgb(51 65 85 / var(--tw-border-opacity, 1))}.border-transparent{border-color:transparent}.border-slate-200\/60{border-color:rgb(226 232 240 / 0.6)}.bg-\[\#F4F6F9\]{--tw-bg-opacity:1;background-color:rgb(244 246 249 / var(--tw-bg-opacity, 1))}.bg-\[\#FFFEFA\]{--tw-bg-opacity:1;background-color:rgb(255 254 250 / var(--tw-bg-opacity, 1))}.bg-amber-50{--tw-bg-opacity:1;background-color:rgb(255 251 235 / var(--tw-bg-opacity, 1))}.bg-blue-50{--tw-bg-opacity:1;background-color:rgb(239 246 255 / var(--tw-bg-opacity, 1))}.bg-lit-blue{--tw-bg-opacity:1;background-color:rgb(11 78 162 / var(--tw-bg-opacity, 1))}.bg-lit-gold{--tw-bg-opacity:1;background-color:rgb(217 119 6 / var(--tw-bg-opacity, 1))}.bg-lit-lightBlue\/50{background-color:rgb(232 241 252 / 0.5)}.bg-lit-navy{--tw-bg-opacity:1;background-color:rgb(0 43 102 / var(--tw-bg-opacity, 1))}.bg-lit-red{--tw-bg-opacity:1;background-color:rgb(200 16 46 / var(--tw-bg-opacity, 1))}.bg-lit-red\/40{background-color:rgb(200 16 46 / 0.4)}.bg-red-50{--tw-bg-opacity:1;background-color:rgb(254 242 242 / var(--tw-bg-opacity, 1))}.bg-slate-100{--tw-bg-opacity:1;background-color:rgb(241 245 249 / var(--tw-bg-opacity, 1))}.bg-slate-200{--tw-bg-opacity:1;background-color:rgb(226 232 240 / var(--tw-bg-opacity, 1))}.bg-slate-400{--tw-bg-opacity:1;background-color:rgb(148 163 184 / var(--tw-bg-opacity, 1))}.bg-slate-50{--tw-bg-opacity:1;background-color:rgb(248 250 252 / var(--tw-bg-opacity, 1))}.bg-slate-700{--tw-bg-opacity:1;background-color:rgb(51 65 85 / var(--tw-bg-opacity, 1))}.bg-slate-800{--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(15 23 42 / var(--tw-bg-opacity, 1))}.bg-slate-900\/80{background-color:rgb(15 23 42 / 0.8)}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-white\/5{background-color:rgb(255 255 255 / 0.05)}.bg-blue-50\/60{background-color:rgb(239 246 255 / 0.6)}.bg-slate-50\/50{background-color:rgb(248 250 252 / 0.5)}.bg-gradient-to-br{background-image:linear-gradient(to bottom right, var(--tw-gradient-stops))}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.from-lit-blue{--tw-gradient-from:#0B4EA2 var(--tw-gradient-from-position);--tw-gradient-to:rgb(11 78 162 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-lit-navy{--tw-gradient-from:#002B66 var(--tw-gradient-from-position);--tw-gradient-to:rgb(0 43 102 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-transparent{--tw-gradient-from:transparent var(--tw-gradient-from-position);--tw-gradient-to:rgb(0 0 0 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-\[\#003882\]{--tw-gradient-to:rgb(0 56 130 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #003882 var(--tw-gradient-via-position), var(--tw-gradient-to)}.via-lit-red{--tw-gradient-to:rgb(200 16 46 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #C8102E var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-lit-blue{--tw-gradient-to:#0B4EA2 var(--tw-gradient-to-position)}.to-lit-red{--tw-gradient-to:#C8102E var(--tw-gradient-to-position)}.to-transparent{--tw-gradient-to:transparent var(--tw-gradient-to-position)}.p-1{padding:0.25rem}.p-2{padding:0.5rem}.p-2\.5{padding:0.625rem}.p-3{padding:0.75rem}.p-3\.5{padding:0.875rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.px-1\.5{padding-left:0.375rem;padding-right:0.375rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-2\.5{padding-left:0.625rem;padding-right:0.625rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.pb-1{padding-bottom:0.25rem}.pb-4{padding-bottom:1rem}.pt-2{padding-top:0.5rem}.pt-4{padding-top:1rem}.pt-6{padding-top:1.5rem}.text-center{text-align:center}.text-right{text-align:right}.font-cinzel{font-family:Cinzel, serif}.font-handwriting{font-family:Caveat, cursive}.font-mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}.font-sans{font-family:Inter, sans-serif}.font-serif{font-family:Playfair Display, serif}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-\[7px\]{font-size:7px}.text-\[8px\]{font-size:8px}.text-\[9px\]{font-size:9px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-medium{font-weight:500}.font-normal{font-weight:400}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.italic{font-style:italic}.leading-relaxed{line-height:1.625}.leading-tight{line-height:1.25}.leading-snug{line-height:1.375}.tracking-tight{letter-spacing:-0.025em}.tracking-tighter{letter-spacing:-0.05em}.tracking-wide{letter-spacing:0.025em}.tracking-wider{letter-spacing:0.05em}.tracking-widest{letter-spacing:0.1em}.text-amber-400{--tw-text-opacity:1;color:rgb(251 191 36 / var(--tw-text-opacity, 1))}.text-amber-600{--tw-text-opacity:1;color:rgb(217 119 6 / var(--tw-text-opacity, 1))}.text-amber-800{--tw-text-opacity:1;color:rgb(146 64 14 / var(--tw-text-opacity, 1))}.text-blue-200{--tw-text-opacity:1;color:rgb(191 219 254 / var(--tw-text-opacity, 1))}.text-emerald-400{--tw-text-opacity:1;color:rgb(52 211 153 / var(--tw-text-opacity, 1))}.text-lit-blue{--tw-text-opacity:1;color:rgb(11 78 162 / var(--tw-text-opacity, 1))}.text-lit-gold{--tw-text-opacity:1;color:rgb(217 119 6 / var(--tw-text-opacity, 1))}.text-lit-navy{--tw-text-opacity:1;color:rgb(0 43 102 / var(--tw-text-opacity, 1))}.text-lit-red{--tw-text-opacity:1;color:rgb(200 16 46 / var(--tw-text-opacity, 1))}.text-lit-redLight{--tw-text-opacity:1;color:rgb(253 236 239 / var(--tw-text-opacity, 1))}.text-slate-100{--tw-text-opacity:1;color:rgb(241 245 249 / var(--tw-text-opacity, 1))}.text-slate-200{--tw-text-opacity:1;color:rgb(226 232 240 / var(--tw-text-opacity, 1))}.text-slate-300{--tw-text-opacity:1;color:rgb(203 213 225 / var(--tw-text-opacity, 1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139 / var(--tw-text-opacity, 1))}.text-slate-600{--tw-text-opacity:1;color:rgb(71 85 105 / var(--tw-text-opacity, 1))}.text-slate-700{--tw-text-opacity:1;color:rgb(51 65 85 / var(--tw-text-opacity, 1))}.text-slate-800{--tw-text-opacity:1;color:rgb(30 41 59 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-amber-300{--tw-text-opacity:1;color:rgb(252 211 77 / var(--tw-text-opacity, 1))}.text-blue-300{--tw-text-opacity:1;color:rgb(147 197 253 / var(--tw-text-opacity, 1))}.underline{-webkit-text-decoration-line:underline;text-decoration-line:underline}.decoration-lit-red{-webkit-text-decoration-color:#C8102E;text-decoration-color:#C8102E}.decoration-2{text-decoration-thickness:2px}.underline-offset-8{text-underline-offset:8px}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.opacity-0{opacity:0}.opacity-10{opacity:0.1}.opacity-\[0\.03\]{opacity:0.03}.opacity-100{opacity:1}.shadow{--tw-shadow:0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-inner{--tw-shadow:inset 0 2px 4px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:inset 0 2px 4px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.blur-2xl{--tw-blur:blur(40px);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.drop-shadow-sm{--tw-drop-shadow:drop-shadow(0 1px 1px rgb(0 0 0 / 0.05));filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-blur-sm{--tw-backdrop-blur:blur(4px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-opacity{transition-property:opacity;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-200{transition-duration:200ms}.duration-300{transition-duration:300ms}.duration-500{transition-duration:500ms}.selection\:bg-amber-100 *::selection{--tw-bg-opacity:1;background-color:rgb(254 243 199 / var(--tw-bg-opacity, 1))}.selection\:bg-amber-100::selection{--tw-bg-opacity:1;background-color:rgb(254 243 199 / var(--tw-bg-opacity, 1))}.hover\:border-lit-blue:hover{--tw-border-opacity:1;border-color:rgb(11 78 162 / var(--tw-border-opacity, 1))}.hover\:bg-amber-50\/60:hover{background-color:rgb(255 251 235 / 0.6)}.hover\:bg-blue-50:hover{--tw-bg-opacity:1;background-color:rgb(239 246 255 / var(--tw-bg-opacity, 1))}.hover\:bg-blue-600:hover{--tw-bg-opacity:1;background-color:rgb(37 99 235 / var(--tw-bg-opacity, 1))}.hover\:bg-red-700:hover{--tw-bg-opacity:1;background-color:rgb(185 28 28 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-50:hover{--tw-bg-opacity:1;background-color:rgb(248 250 252 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-800:hover{--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}.hover\:bg-white:hover{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.hover\:text-amber-800:hover{--tw-text-opacity:1;color:rgb(146 64 14 / var(--tw-text-opacity, 1))}.hover\:text-lit-navy:hover{--tw-text-opacity:1;color:rgb(0 43 102 / var(--tw-text-opacity, 1))}.hover\:text-lit-red:hover{--tw-text-opacity:1;color:rgb(200 16 46 / var(--tw-text-opacity, 1))}.hover\:text-red-800:hover{--tw-text-opacity:1;color:rgb(153 27 27 / var(--tw-text-opacity, 1))}.hover\:text-slate-600:hover{--tw-text-opacity:1;color:rgb(71 85 105 / var(--tw-text-opacity, 1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.focus\:bg-amber-50:focus{--tw-bg-opacity:1;background-color:rgb(255 251 235 / var(--tw-bg-opacity, 1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.focus\:ring-1:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-2:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-amber-400:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(251 191 36 / var(--tw-ring-opacity, 1))}.focus\:ring-lit-blue:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(11 78 162 / var(--tw-ring-opacity, 1))}.disabled\:cursor-not-allowed:disabled{cursor:not-allowed}.disabled\:opacity-50:disabled{opacity:0.5}.group[open] .group-open\:rotate-180{--tw-rotate:180deg;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:opacity-100{opacity:1}@media (min-width: 640px){.sm\:m-6{margin:1.5rem}.sm\:inline{display:inline}.sm\:inline-flex{display:inline-flex}.sm\:w-52{width:13rem}.sm\:w-64{width:16rem}.sm\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.sm\:flex-row{flex-direction:row}.sm\:p-10{padding:2.5rem}.sm\:p-6{padding:1.5rem}.sm\:p-8{padding:2rem}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:text-right{text-align:right}.sm\:text-2xl{font-size:1.5rem;line-height:2rem}.sm\:text-3xl{font-size:1.875rem;line-height:2.25rem}.sm\:text-4xl{font-size:2.25rem;line-height:2.5rem}.sm\:text-base{font-size:1rem;line-height:1.5rem}.sm\:text-sm{font-size:0.875rem;line-height:1.25rem}.sm\:text-xl{font-size:1.25rem;line-height:1.75rem}}@media (min-width: 768px){.md\:col-span-1{grid-column:span 1 / span 1}.md\:col-span-2{grid-column:span 2 / span 2}.md\:col-span-7{grid-column:span 7 / span 7}.md\:flex{display:flex}.md\:w-auto{width:auto}.md\:grid-cols-12{grid-template-columns:repeat(12, minmax(0, 1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:items-center{align-items:center}}@media (min-width: 1024px){.lg\:block{display:block}.lg\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.lg\:px-8{padding-left:2rem;padding-right:2rem}}</style></head>
+
+<body class="bg-[#F4F6F9] text-slate-800 font-sans min-h-screen flex flex-col antialiased">
+
+  <header class="bg-lit-navy text-white shadow-md sticky top-0 z-40 border-b-4 border-lit-red">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Logo & Branding -->
+        <div class="flex items-center gap-3">
+          <!-- Stylized LIT Red Star Vector Logo -->
+          <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center p-1 shadow-inner relative overflow-hidden flex-shrink-0">
+            <svg viewBox="0 0 100 100" class="w-full h-full">
+              <!-- LIT Bold Geometric Monogram -->
+              <path d="M12 12 H42 V70 H78 V88 H12 Z" fill="#002B66"></path>
+              <polygon points="50,6 59,34 89,34 65,51 74,79 50,62 26,79 35,51 11,34 41,34" fill="#C8102E" transform="scale(0.48) translate(38, -5)"></polygon>
+              <path d="M52 30 H92 V46 H76 V88 H58 V46 H52 Z" fill="#002B66"></path>
+            </svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs uppercase font-extrabold tracking-widest text-lit-redLight bg-lit-red/40 px-2 py-0.5 rounded">LIT Instruction to Industry</span>
+              <span class="text-xs text-blue-200 hidden sm:inline">2026 Academic Year</span>
+            </div>
+            <h1 class="text-lg sm:text-xl font-bold tracking-tight text-white flex items-center gap-2">
+              Teacher Externship Interactive Workbook
+            </h1>
+          </div>
+        </div>
+
+        <!-- Extern Profile & Quick Actions -->
+        <div class="flex items-center gap-4">
+          <div class="hidden md:flex flex-col text-right">
+            <span id="extern-display-name" class="text-sm font-semibold text-white">Type your name</span>
+            <span class="text-xs text-blue-200">High School to Higher Ed Pathway</span>
+          </div>
+
+          <!-- Quick Certificate Trigger Button -->
+          <button id="header-cert-btn" onclick="openCertificateModal()" class="relative inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 bg-lit-red hover:bg-red-700 text-white shadow-sm disabled:opacity-50 disabled:cursor-not-allowed">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="award" aria-hidden="true" class="lucide lucide-award w-4 h-4"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"></path><circle cx="12" cy="8" r="6"></circle></svg>
+            <span>Certificate</span>
+            <span id="header-cert-badge" class="ml-1 px-1.5 py-0.2 text-[10px] bg-white text-lit-red rounded-full font-bold hidden">Ready</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <section class="bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <!-- Progress Indicators -->
+        <div class="flex-1 max-w-xl">
+          <div class="flex items-center justify-between text-xs font-semibold mb-1">
+            <span class="text-slate-600 flex items-center gap-1.5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle-2" aria-hidden="true" class="lucide lucide-check-circle-2 w-4 h-4 text-lit-blue"><circle cx="12" cy="12" r="10"></circle><path d="m16 9-5.5 5.5L8 12"></path></svg>
+              Overall Externship Program Completion
+            </span>
+            <span id="overall-percentage" class="text-lit-navy font-bold text-sm">22%</span>
+          </div>
+          <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden border border-slate-200">
+            <div id="overall-progress-bar" class="bg-gradient-to-r from-lit-blue to-lit-red h-full rounded-full transition-all duration-500" style="width: 22%;"></div>
+          </div>
+        </div>
+
+        <!-- Key Milestones Checklist Badges -->
+        <div class="flex flex-wrap items-center gap-2 text-xs font-medium">
+          <div id="badge-days" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-200">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="calendar" aria-hidden="true" class="lucide lucide-calendar w-3.5 h-3.5"><path d="M8 2v3"></path><path d="M16 2v3"></path><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18"></path></svg>
+            <span id="badge-days-text">2/8 Days Logged</span>
+          </div>
+          <div id="badge-hours" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-200">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="clock" aria-hidden="true" class="lucide lucide-clock w-3.5 h-3.5"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+            <span id="badge-hours-text">2.5/4.0 Mentor Hrs</span>
+          </div>
+          <div id="badge-workbook" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-200">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="book-open" aria-hidden="true" class="lucide lucide-book-open w-3.5 h-3.5"><path d="M12 5v16"></path><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"></path></svg>
+            <span id="badge-wb-text">0/15 Reflections</span>
+          </div>
+          <div id="badge-quiz" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-200">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="help-circle" aria-hidden="true" class="lucide lucide-help-circle w-3.5 h-3.5"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg>
+            <span id="badge-quiz-text">Quiz Pending</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div class="flex border-b border-slate-200 gap-2 overflow-x-auto custom-scrollbar mb-6 pb-1">
+      <button onclick="switchTab('dashboard')" id="tab-btn-dashboard" class="tab-btn active px-4 py-2.5 font-semibold text-sm rounded-t-lg transition flex items-center gap-2 border-b-2 border-lit-blue text-lit-blue bg-white shadow-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="layout-dashboard" aria-hidden="true" class="lucide lucide-layout-dashboard w-4 h-4"><rect width="7" height="9" x="3" y="3" rx="1"></rect><rect width="7" height="5" x="14" y="3" rx="1"></rect><rect width="7" height="9" x="14" y="12" rx="1"></rect><rect width="7" height="5" x="3" y="16" rx="1"></rect></svg>
+        Program Dashboard
+      </button>
+      <button onclick="switchTab('tracker')" id="tab-btn-tracker" class="tab-btn px-4 py-2.5 font-medium text-sm rounded-t-lg transition flex items-center gap-2 border-b-2 border-transparent text-slate-600 hover:text-lit-navy hover:bg-slate-50">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="calendar-check-2" aria-hidden="true" class="lucide lucide-calendar-check-2 w-4 h-4"><path d="M 19 3 L 5 3"></path><path d="M 21 13 L 21 5"></path><path d="M 21 5 A2 2 0 0 0 19 3"></path><path d="M 3 19 A2 2 0 0 0 5 21"></path><path d="M 3 5 L 3 19"></path><path d="M 5 3 A2 2 0 0 0 3 5"></path><path d="m16 19 2 2 4-4"></path><path d="M16 2v3"></path><path d="M3 9h18"></path><path d="M5 21 L12.5 21"></path><path d="M8 2v3"></path></svg>
+        8-Day &amp; 4-Hr Tracker
+      </button>
+      <button onclick="switchTab('workbook')" id="tab-btn-workbook" class="tab-btn px-4 py-2.5 font-medium text-sm rounded-t-lg transition flex items-center gap-2 border-b-2 border-transparent text-slate-600 hover:text-lit-navy hover:bg-slate-50">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="file-edit" aria-hidden="true" class="lucide lucide-file-edit w-4 h-4"><path d="M12.659 22H18a2 2 0 0 0 2-2V8a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 14 2H6a2 2 0 0 0-2 2v9.34"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="M10.378 12.622a1 1 0 0 1 3 3.003L8.36 20.637a2 2 0 0 1-.854.506l-2.867.837a.5.5 0 0 1-.62-.62l.836-2.869a2 2 0 0 1 .506-.853z"></path></svg>
+        Core Workbook (15 Areas)
+      </button>
+      <button onclick="switchTab('actionplan')" id="tab-btn-actionplan" class="tab-btn px-4 py-2.5 font-medium text-sm rounded-t-lg transition flex items-center gap-2 border-b-2 border-transparent text-slate-600 hover:text-lit-navy hover:bg-slate-50">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="target" aria-hidden="true" class="lucide lucide-target w-4 h-4"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+        Action Plan &amp; Dec 3rd Showcase
+      </button>
+      <button onclick="switchTab('quiz')" id="tab-btn-quiz" class="tab-btn px-4 py-2.5 font-medium text-sm rounded-t-lg transition flex items-center gap-2 border-b-2 border-transparent text-slate-600 hover:text-lit-navy hover:bg-slate-50">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-square" aria-hidden="true" class="lucide lucide-check-square w-4 h-4"><path d="M21 10.656V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12.344"></path><path d="m9 11 3 3L22 4"></path></svg>
+        Milestone Quiz &amp; Audit
+      </button>
+    </div>
+
+    <div id="tab-dashboard" class="tab-content space-y-6">
+      
+      <!-- Welcome Banner -->
+      <div class="bg-gradient-to-br from-lit-navy via-[#003882] to-lit-blue rounded-2xl p-6 sm:p-8 text-white shadow-lg relative overflow-hidden">
+        <div class="relative z-10 max-w-3xl">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-lit-red text-white text-xs font-bold uppercase tracking-wider mb-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="sparkles" aria-hidden="true" class="lucide lucide-sparkles w-3.5 h-3.5"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path><path d="M20 2v4"></path><path d="M22 4h-4"></path><circle cx="4" cy="20" r="2"></circle></svg> LIT Mentorship &amp; Applied Learning
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Empowering High School Educators Through Higher Education Immersion</h2>
+          <p class="mt-2 text-slate-200 text-sm sm:text-base leading-relaxed">
+            Welcome to the Lamar Institute of Technology (LIT) Instruction to Industry externship portal. Navigate your 8-day distributed active window (Oct 1 – Dec 3), engage in 4+ hours of collaborative mentor guidance, document evidence in your 15-topic workbook, and craft your final classroom action plan to qualify for your professional development certificate and stipend.
+          </p>
+
+          <div class="mt-6 flex flex-wrap items-center gap-4">
+            <button onclick="switchTab('tracker')" class="px-5 py-2.5 bg-white text-lit-navy font-bold text-sm rounded-xl hover:bg-blue-50 transition shadow">
+              Log Today's Hours &amp; Activity →
+            </button>
+            <button onclick="switchTab('workbook')" class="px-5 py-2.5 bg-lit-red hover:bg-red-700 text-white font-semibold text-sm rounded-xl transition shadow">
+              Open Observation Questions
+            </button>
+          </div>
+        </div>
+
+        <!-- Decorative background graphics -->
+        <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-white/5 rounded-full blur-2xl pointer-events-none"></div>
+        <div class="absolute top-4 right-6 opacity-10 hidden lg:block">
+          <svg width="220" height="220" viewBox="0 0 100 100" fill="white">
+            <polygon points="50,6 59,34 89,34 65,51 74,79 50,62 26,79 35,51 11,34 41,34"></polygon>
+          </svg>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Pillar 1 -->
+        <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-blue-50 text-lit-blue flex items-center justify-center mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="users" aria-hidden="true" class="lucide lucide-users w-5 h-5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><path d="M16 3.128a4 4 0 0 1 0 7.744"></path><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><circle cx="9" cy="7" r="4"></circle></svg>
+            </div>
+            <h3 class="font-bold text-slate-800 text-base">1. Structured Mentorship</h3>
+            <p class="text-xs text-slate-500 mt-1">Direct 1-on-1 guidance &amp; goal setting with assigned LIT faculty/program mentors.</p>
+            <div class="mt-4 p-3 bg-slate-50 rounded-lg border border-slate-100">
+              <div class="flex justify-between text-xs font-semibold mb-1">
+                <span>Engagement Target: 4.0 Hours</span>
+                <span id="dash-hours-val" class="text-lit-blue font-bold">2.5 hrs</span>
+              </div>
+              <div class="w-full bg-slate-200 rounded-full h-2">
+                <div id="dash-hours-bar" class="bg-lit-blue h-full rounded-full" style="width: 63%;"></div>
+              </div>
+            </div>
+          </div>
+          <button onclick="switchTab('tracker')" class="mt-4 text-xs font-semibold text-lit-blue hover:text-lit-navy inline-flex items-center gap-1">
+            View mentor interaction logs →
+          </button>
+        </div>
+
+        <!-- Pillar 2 -->
+        <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-red-50 text-lit-red flex items-center justify-center mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="calendar" aria-hidden="true" class="lucide lucide-calendar w-5 h-5"><path d="M8 2v3"></path><path d="M16 2v3"></path><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18"></path></svg>
+            </div>
+            <h3 class="font-bold text-slate-800 text-base">2. 8-Day Active Commitment</h3>
+            <p class="text-xs text-slate-500 mt-1">Distributed active observations, LMS reviews, interviews, and classroom shadows.</p>
+            <div class="mt-4 p-3 bg-slate-50 rounded-lg border border-slate-100">
+              <div class="flex justify-between text-xs font-semibold mb-1">
+                <span>Completed Days: 8 Days Target</span>
+                <span id="dash-days-val" class="text-lit-red font-bold">2 / 8</span>
+              </div>
+              <div class="w-full bg-slate-200 rounded-full h-2">
+                <div id="dash-days-bar" class="bg-lit-red h-full rounded-full" style="width: 25%;"></div>
+              </div>
+            </div>
+          </div>
+          <button onclick="switchTab('tracker')" class="mt-4 text-xs font-semibold text-lit-red hover:text-red-800 inline-flex items-center gap-1">
+            Check off daily engagement →
+          </button>
+        </div>
+
+        <!-- Pillar 3 -->
+        <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-amber-50 text-lit-gold flex items-center justify-center mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="presentation" aria-hidden="true" class="lucide lucide-presentation w-5 h-5"><path d="M2 3h20"></path><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"></path><path d="m7 21 5-5 5 5"></path></svg>
+            </div>
+            <h3 class="font-bold text-slate-800 text-base">3. Showcase &amp; Deliverables</h3>
+            <p class="text-xs text-slate-500 mt-1">Final Action Plan synthesis, 3 instructional changes &amp; Dec 3rd presentation showcase.</p>
+            <div class="mt-4 p-3 bg-slate-50 rounded-lg border border-slate-100">
+              <div class="flex justify-between text-xs font-semibold mb-1">
+                <span>Workbook &amp; Action Plan</span>
+                <span id="dash-plan-val" class="text-lit-gold font-bold">In Progress</span>
+              </div>
+              <div class="w-full bg-slate-200 rounded-full h-2">
+                <div id="dash-plan-bar" class="bg-lit-gold h-full rounded-full" style="width: 0%"></div>
+              </div>
+            </div>
+          </div>
+          <button onclick="switchTab('actionplan')" class="mt-4 text-xs font-semibold text-lit-gold hover:text-amber-800 inline-flex items-center gap-1">
+            Build your action presentation →
+          </button>
+        </div>
+
+      </div>
+
+      <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
+        <h3 class="text-lg font-bold text-slate-800 mb-1 flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="folder-check" aria-hidden="true" class="lucide lucide-folder-check w-5 h-5 text-lit-blue"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"></path><path d="m9 13 2 2 4-4"></path></svg>
+          Externship Core Evidence Checklist
+        </h3>
+        <p class="text-xs text-slate-500 mb-4">Keep your artifacts organized for your portfolio and final presentation.</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          
+          <div class="p-4 rounded-xl border border-slate-200 hover:border-lit-blue transition bg-slate-50">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-lit-blue">LMS Observations</span>
+              <input type="checkbox" id="chk-ev-lms" onchange="updateEvidenceState()" class="w-4 h-4 text-lit-blue rounded focus:ring-lit-blue">
+            </div>
+            <p class="text-xs text-slate-600">Gather detailed screenshots &amp; notes of Blackboard / digital course structures.</p>
+          </div>
+
+          <div class="p-4 rounded-xl border border-slate-200 hover:border-lit-blue transition bg-slate-50">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-lit-blue">Faculty &amp; Syllabus</span>
+              <input type="checkbox" id="chk-ev-faculty" onchange="updateEvidenceState()" class="w-4 h-4 text-lit-blue rounded focus:ring-lit-blue">
+            </div>
+            <p class="text-xs text-slate-600">Compile LIT instructor interviews and rigorous dual-credit syllabus comparisons.</p>
+          </div>
+
+          <div class="p-4 rounded-xl border border-slate-200 hover:border-lit-blue transition bg-slate-50">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-lit-blue">Support Services</span>
+              <input type="checkbox" id="chk-ev-support" onchange="updateEvidenceState()" class="w-4 h-4 text-lit-blue rounded focus:ring-lit-blue">
+            </div>
+            <p class="text-xs text-slate-600">Document tutoring, disability, counseling, and advising resources on campus.</p>
+          </div>
+
+          <div class="p-4 rounded-xl border border-slate-200 hover:border-lit-blue transition bg-slate-50">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-lit-blue">Tech Tools</span>
+              <input type="checkbox" id="chk-ev-tech" onchange="updateEvidenceState()" class="w-4 h-4 text-lit-blue rounded focus:ring-lit-blue">
+            </div>
+            <p class="text-xs text-slate-600">Evaluate educational tech, simulation software, and lab gear utilized in teaching.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Extern Profile Setup Card -->
+      <div class="bg-lit-lightBlue/50 border border-blue-200 rounded-xl p-5 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-lit-navy text-white flex items-center justify-center font-bold">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="user-check" aria-hidden="true" class="lucide lucide-user-check w-5 h-5"><path d="m16 11 2 2 4-4"></path><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+          </div>
+          <div>
+            <h4 class="text-sm font-bold text-slate-800">Extern Profile &amp; Certificate Details</h4>
+            <p class="text-xs text-slate-600">Ensure your name and home high school or discipline are accurate for the final certificate.</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 w-full md:w-auto">
+          <input type="text" id="input-extern-name" placeholder="Full Name (e.g., Sarah Jenkins, M.Ed.)" class="px-3 py-2 text-xs rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-lit-blue w-full sm:w-64" oninput="updateProfileName(this.value)">
+          <input type="text" id="input-extern-school" placeholder="High School / District" class="px-3 py-2 text-xs rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-lit-blue w-full sm:w-52" oninput="updateProfileSchool(this.value)">
+        </div>
+      </div>
+
+    </div>
+
+    <div id="tab-tracker" class="tab-content hidden space-y-6">
+      
+      <!-- Tracker Header -->
+      <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <span class="text-xs font-bold text-lit-red uppercase tracking-wider">Requirement Check-In</span>
+          <h2 class="text-xl font-bold text-lit-navy">8-Day Engagement &amp; 4-Hour Mentor Interaction Tracker</h2>
+          <p class="text-xs text-slate-500 mt-1">
+            Program span: October 1st – December 3rd. Choose flexible formats (in-person coffee chats, virtual planning, classroom shadows).
+          </p>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="text-right">
+            <div class="text-xs text-slate-500">Total Mentor Time Logged</div>
+            <div id="tracker-mentor-total" class="text-2xl font-extrabold text-lit-blue">2.5 / 4.0 hrs</div>
+          </div>
+          <div class="w-12 h-12 rounded-xl bg-blue-50 text-lit-blue flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="clock" aria-hidden="true" class="lucide lucide-clock w-6 h-6"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8-Day Interactive Cards Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="days-container"><div class="p-4 rounded-xl border transition-all bg-blue-50/60 border-blue-200">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-lit-blue">
+              Day 01 • Oct 02
+            </span>
+            <input type="checkbox" checked="" onchange="toggleDayComplete(0, this.checked)" class="w-4 h-4 text-lit-blue rounded focus:ring-lit-blue">
+          </div>
+          <h4 class="text-xs font-bold text-slate-800 mb-1 leading-snug">Orientation &amp; Mentor Alignment</h4>
+          <p class="text-[11px] text-slate-500 mb-3">Blackboard setup &amp; 1-on-1 goal review</p>
+          <div class="flex items-center justify-between text-[11px] border-t border-slate-200/60 pt-2 text-slate-600">
+            <span>Status:</span>
+            <span class="font-bold text-lit-blue">
+              Completed
+            </span>
+          </div>
+        </div><div class="p-4 rounded-xl border transition-all bg-blue-50/60 border-blue-200">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-lit-blue">
+              Day 02 • Oct 10
+            </span>
+            <input type="checkbox" checked="" onchange="toggleDayComplete(1, this.checked)" class="w-4 h-4 text-lit-blue rounded focus:ring-lit-blue">
+          </div>
+          <h4 class="text-xs font-bold text-slate-800 mb-1 leading-snug">LMS &amp; Syllabus Observations</h4>
+          <p class="text-[11px] text-slate-500 mb-3">Dual credit course structure and outcomes</p>
+          <div class="flex items-center justify-between text-[11px] border-t border-slate-200/60 pt-2 text-slate-600">
+            <span>Status:</span>
+            <span class="font-bold text-lit-blue">
+              Completed
+            </span>
+          </div>
+        </div><div class="p-4 rounded-xl border transition-all bg-white border-slate-200 shadow-sm">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              Day 03 • Oct 18
+            </span>
+            <input type="checkbox" onchange="toggleDayComplete(2, this.checked)" class="w-4 h-4 text-lit-blue rounded focus:ring-lit-blue">
+          </div>
+          <h4 class="text-xs font-bold text-slate-800 mb-1 leading-snug">Classroom Instruction Shadow</h4>
+          <p class="text-[11px] text-slate-500 mb-3">Observing lecture &amp; active lab dynamics</p>
+          <div class="flex items-center justify-between text-[11px] border-t border-slate-200/60 pt-2 text-slate-600">
+            <span>Status:</span>
+            <span class="font-bold text-slate-400">
+              Pending
+            </span>
+          </div>
+        </div><div class="p-4 rounded-xl border transition-all bg-white border-slate-200 shadow-sm">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              Day 04 • Oct 26
+            </span>
+            <input type="checkbox" onchange="toggleDayComplete(3, this.checked)" class="w-4 h-4 text-lit-blue rounded focus:ring-lit-blue">
+          </div>
+          <h4 class="text-xs font-bold text-slate-800 mb-1 leading-snug">Faculty &amp; Student Interviews</h4>
+          <p class="text-[11px] text-slate-500 mb-3">Student self-advocacy &amp; faculty support</p>
+          <div class="flex items-center justify-between text-[11px] border-t border-slate-200/60 pt-2 text-slate-600">
+            <span>Status:</span>
+            <span class="font-bold text-slate-400">
+              Pending
+            </span>
+          </div>
+        </div><div class="p-4 rounded-xl border transition-all bg-white border-slate-200 shadow-sm">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              Day 05 • Nov 04
+            </span>
+            <input type="checkbox" onchange="toggleDayComplete(4, this.checked)" class="w-4 h-4 text-lit-blue rounded focus:ring-lit-blue">
+          </div>
+          <h4 class="text-xs font-bold text-slate-800 mb-1 leading-snug">Campus Support Services Tour</h4>
+          <p class="text-[11px] text-slate-500 mb-3">Tutoring, testing, disability services</p>
+          <div class="flex items-center justify-between text-[11px] border-t border-slate-200/60 pt-2 text-slate-600">
+            <span>Status:</span>
+            <span class="font-bold text-slate-400">
+              Pending
+            </span>
+          </div>
+        </div><div class="p-4 rounded-xl border transition-all bg-white border-slate-200 shadow-sm">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              Day 06 • Nov 12
+            </span>
+            <input type="checkbox" onchange="toggleDayComplete(5, this.checked)" class="w-4 h-4 text-lit-blue rounded focus:ring-lit-blue">
+          </div>
+          <h4 class="text-xs font-bold text-slate-800 mb-1 leading-snug">Tech Tools &amp; Lab Equipment</h4>
+          <p class="text-[11px] text-slate-500 mb-3">Evaluating digital simulation platforms</p>
+          <div class="flex items-center justify-between text-[11px] border-t border-slate-200/60 pt-2 text-slate-600">
+            <span>Status:</span>
+            <span class="font-bold text-slate-400">
+              Pending
+            </span>
+          </div>
+        </div><div class="p-4 rounded-xl border transition-all bg-white border-slate-200 shadow-sm">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              Day 07 • Nov 20
+            </span>
+            <input type="checkbox" onchange="toggleDayComplete(6, this.checked)" class="w-4 h-4 text-lit-blue rounded focus:ring-lit-blue">
+          </div>
+          <h4 class="text-xs font-bold text-slate-800 mb-1 leading-snug">Pedagogy Synthesis &amp; Draft</h4>
+          <p class="text-[11px] text-slate-500 mb-3">Drafting Top 3 classroom changes</p>
+          <div class="flex items-center justify-between text-[11px] border-t border-slate-200/60 pt-2 text-slate-600">
+            <span>Status:</span>
+            <span class="font-bold text-slate-400">
+              Pending
+            </span>
+          </div>
+        </div><div class="p-4 rounded-xl border transition-all bg-white border-slate-200 shadow-sm">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              Day 08 • Dec 03
+            </span>
+            <input type="checkbox" onchange="toggleDayComplete(7, this.checked)" class="w-4 h-4 text-lit-blue rounded focus:ring-lit-blue">
+          </div>
+          <h4 class="text-xs font-bold text-slate-800 mb-1 leading-snug">Dec 3rd Finale Presentation</h4>
+          <p class="text-[11px] text-slate-500 mb-3">Showcase action plan &amp; receive stipend</p>
+          <div class="flex items-center justify-between text-[11px] border-t border-slate-200/60 pt-2 text-slate-600">
+            <span>Status:</span>
+            <span class="font-bold text-slate-400">
+              Pending
+            </span>
+          </div>
+        </div></div>
+
+      <!-- Mentor Interaction Meeting Details Card -->
+      <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="messages-square" aria-hidden="true" class="lucide lucide-messages-square w-5 h-5 text-lit-blue"><path d="M16 10a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 14.286V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path><path d="M20 9a2 2 0 0 1 2 2v10.286a.71.71 0 0 1-1.212.502l-2.202-2.202A2 2 0 0 0 17.172 19H10a2 2 0 0 1-2-2v-1"></path></svg>
+              Detailed Mentor Meeting Notes &amp; Focus
+            </h3>
+            <p class="text-xs text-slate-500">Record dates, topics discussed, and feedback received from your assigned LIT mentor.</p>
+          </div>
+          <button onclick="addMentorLogEntry()" class="px-3 py-1.5 text-xs font-semibold bg-lit-navy text-white rounded-lg hover:bg-slate-800 transition flex items-center gap-1.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" aria-hidden="true" class="lucide lucide-plus w-3.5 h-3.5"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg> Add Session Note
+          </button>
+        </div>
+
+        <div id="mentor-logs-list" class="space-y-3">
+          <!-- Default Template Row -->
+          <div class="p-3.5 rounded-lg border border-slate-200 bg-slate-50 grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
+            <div class="md:col-span-2">
+              <label class="block text-[10px] font-semibold text-slate-500 uppercase">Format &amp; Date</label>
+              <input type="text" value="Session 1 - In Person" class="text-xs font-semibold text-slate-800 bg-white border border-slate-300 rounded px-2 py-1 w-full">
+            </div>
+            <div class="md:col-span-2">
+              <label class="block text-[10px] font-semibold text-slate-500 uppercase">Duration (Hours)</label>
+              <select onchange="recalculateHoursFromTable()" class="mentor-duration-select text-xs font-semibold text-slate-800 bg-white border border-slate-300 rounded px-2 py-1 w-full">
+                <option value="1.0" selected="">1.0 Hour</option>
+                <option value="1.5">1.5 Hours</option>
+                <option value="2.0">2.0 Hours</option>
+                <option value="0.5">0.5 Hour</option>
+              </select>
+            </div>
+            <div class="md:col-span-7">
+              <label class="block text-[10px] font-semibold text-slate-500 uppercase">Key Discussions &amp; Applied Solutions</label>
+              <input type="text" placeholder="e.g. Initial alignment, curriculum standards, syllabus crosswalk, student support discussion" class="text-xs text-slate-800 bg-white border border-slate-300 rounded px-2 py-1 w-full">
+            </div>
+            <div class="md:col-span-1 text-right">
+              <button onclick="this.closest('.p-3.5').remove(); recalculateHoursFromTable();" class="text-slate-400 hover:text-lit-red p-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" class="lucide lucide-trash-2 w-4 h-4"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="p-3.5 rounded-lg border border-slate-200 bg-slate-50 grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
+            <div class="md:col-span-2">
+              <label class="block text-[10px] font-semibold text-slate-500 uppercase">Format &amp; Date</label>
+              <input type="text" value="Session 2 - Virtual" class="text-xs font-semibold text-slate-800 bg-white border border-slate-300 rounded px-2 py-1 w-full">
+            </div>
+            <div class="md:col-span-2">
+              <label class="block text-[10px] font-semibold text-slate-500 uppercase">Duration (Hours)</label>
+              <select onchange="recalculateHoursFromTable()" class="mentor-duration-select text-xs font-semibold text-slate-800 bg-white border border-slate-300 rounded px-2 py-1 w-full">
+                <option value="1.0">1.0 Hour</option>
+                <option value="1.5" selected="">1.5 Hours</option>
+                <option value="2.0">2.0 Hours</option>
+                <option value="0.5">0.5 Hour</option>
+              </select>
+            </div>
+            <div class="md:col-span-7">
+              <label class="block text-[10px] font-semibold text-slate-500 uppercase">Key Discussions &amp; Applied Solutions</label>
+              <input type="text" placeholder="e.g. Technology evaluation, LMS assignment grading criteria, workforce readiness" class="text-xs text-slate-800 bg-white border border-slate-300 rounded px-2 py-1 w-full">
+            </div>
+            <div class="md:col-span-1 text-right">
+              <button onclick="this.closest('.p-3.5').remove(); recalculateHoursFromTable();" class="text-slate-400 hover:text-lit-red p-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" class="lucide lucide-trash-2 w-4 h-4"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="tab-workbook" class="tab-content hidden space-y-6">
+      
+      <!-- Workbook Navigation & Category Bar -->
+      <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <span class="text-xs font-bold text-lit-blue uppercase tracking-wider">Official Curriculum</span>
+          <h2 class="text-xl font-bold text-slate-800">Teacher Externship Observation Prompts (15 Sections)</h2>
+          <p class="text-xs text-slate-500 mt-1">Directly adapted from the LIT Teacher Externship Workbook: Instruction to Industry.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-slate-500">Filter by category:</span>
+          <select id="wb-category-filter" onchange="filterWorkbookCategories(this.value)" class="text-xs bg-slate-50 border border-slate-300 rounded-lg px-3 py-1.5 font-medium text-slate-700">
+            <option value="all">All 15 Areas</option>
+            <option value="pedagogy">Instruction &amp; Pedagogy (1-5)</option>
+            <option value="culture">Culture &amp; Continuous Growth (6-8)</option>
+            <option value="tech">Tech &amp; Management (9-12)</option>
+            <option value="pathways">Support &amp; Career Pathways (13-15)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Container for 15 Dynamic Accordion Question Sets -->
+      <div id="workbook-container" class="space-y-4"><details class="group bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm transition">
+          <summary class="p-4 cursor-pointer flex items-center justify-between bg-white hover:bg-slate-50 select-none transition">
+            <div class="flex items-center gap-3">
+              <div class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 text-xs font-bold flex items-center justify-center">
+                1
+              </div>
+              <span class="text-sm font-bold text-slate-800">1. Observing College-Level Instruction</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">
+                Open Prompts
+              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"><path d="m6 9 6 6 6-6"></path></svg>
+            </div>
+          </summary>
+          <div class="p-5 border-t border-slate-100 bg-white">
+            
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> What instructional strategies did you observe that were most effective in engaging students?
+              </label>
+              <textarea oninput="handleReflectionInput(1, 0, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> How do LIT instructors balance academic rigor with student support?
+              </label>
+              <textarea oninput="handleReflectionInput(1, 1, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> How can you incorporate these strategies into your dual credit courses?
+              </label>
+              <textarea oninput="handleReflectionInput(1, 2, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+          </div>
+        </details><details class="group bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm transition">
+          <summary class="p-4 cursor-pointer flex items-center justify-between bg-white hover:bg-slate-50 select-none transition">
+            <div class="flex items-center gap-3">
+              <div class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 text-xs font-bold flex items-center justify-center">
+                2
+              </div>
+              <span class="text-sm font-bold text-slate-800">2. Course Structure &amp; Learning Processes</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">
+                Open Prompts
+              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"><path d="m6 9 6 6 6-6"></path></svg>
+            </div>
+          </summary>
+          <div class="p-5 border-t border-slate-100 bg-white">
+            
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> Describe a typical class session or learning activity you observed.
+              </label>
+              <textarea oninput="handleReflectionInput(2, 0, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> What methods are used to organize coursework, assignments, and student expectations?
+              </label>
+              <textarea oninput="handleReflectionInput(2, 1, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> How can you adapt these practices to your classroom?
+              </label>
+              <textarea oninput="handleReflectionInput(2, 2, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+          </div>
+        </details><details class="group bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm transition">
+          <summary class="p-4 cursor-pointer flex items-center justify-between bg-white hover:bg-slate-50 select-none transition">
+            <div class="flex items-center gap-3">
+              <div class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 text-xs font-bold flex items-center justify-center">
+                3
+              </div>
+              <span class="text-sm font-bold text-slate-800">3. Communication &amp; Student Engagement</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">
+                Open Prompts
+              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"><path d="m6 9 6 6 6-6"></path></svg>
+            </div>
+          </summary>
+          <div class="p-5 border-t border-slate-100 bg-white">
+            
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> What communication practices appear most effective between instructors and students?
+              </label>
+              <textarea oninput="handleReflectionInput(3, 0, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> How do instructors communicate expectations regarding assignments, participation, and professionalism?
+              </label>
+              <textarea oninput="handleReflectionInput(3, 1, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> How can you model these expectations for your students?
+              </label>
+              <textarea oninput="handleReflectionInput(3, 2, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+          </div>
+        </details><details class="group bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm transition">
+          <summary class="p-4 cursor-pointer flex items-center justify-between bg-white hover:bg-slate-50 select-none transition">
+            <div class="flex items-center gap-3">
+              <div class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 text-xs font-bold flex items-center justify-center">
+                4
+              </div>
+              <span class="text-sm font-bold text-slate-800">4. Collaboration &amp; Student Success</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">
+                Open Prompts
+              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"><path d="m6 9 6 6 6-6"></path></svg>
+            </div>
+          </summary>
+          <div class="p-5 border-t border-slate-100 bg-white">
+            
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> How do faculty collaborate with colleagues, advisors, and student support services?
+              </label>
+              <textarea oninput="handleReflectionInput(4, 0, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> What strategies are used to provide feedback and support student growth?
+              </label>
+              <textarea oninput="handleReflectionInput(4, 1, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> How can you incorporate collaboration and feedback opportunities into your classroom?
+              </label>
+              <textarea oninput="handleReflectionInput(4, 2, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+          </div>
+        </details><details class="group bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm transition">
+          <summary class="p-4 cursor-pointer flex items-center justify-between bg-white hover:bg-slate-50 select-none transition">
+            <div class="flex items-center gap-3">
+              <div class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 text-xs font-bold flex items-center justify-center">
+                5
+              </div>
+              <span class="text-sm font-bold text-slate-800">5. Critical Thinking &amp; Application of Knowledge</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">
+                Open Prompts
+              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"><path d="m6 9 6 6 6-6"></path></svg>
+            </div>
+          </summary>
+          <div class="p-5 border-t border-slate-100 bg-white">
+            
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> Describe an activity or lesson that encouraged critical thinking and problem-solving.
+              </label>
+              <textarea oninput="handleReflectionInput(5, 0, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> What instructional approaches helped students apply concepts to real-world situations?
+              </label>
+              <textarea oninput="handleReflectionInput(5, 1, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> How can you incorporate similar opportunities into your dual credit courses?
+              </label>
+              <textarea oninput="handleReflectionInput(5, 2, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+          </div>
+        </details><details class="group bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm transition">
+          <summary class="p-4 cursor-pointer flex items-center justify-between bg-white hover:bg-slate-50 select-none transition">
+            <div class="flex items-center gap-3">
+              <div class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 text-xs font-bold flex items-center justify-center">
+                6
+              </div>
+              <span class="text-sm font-bold text-slate-800">6. College Expectations &amp; Learning Culture</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">
+                Open Prompts
+              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"><path d="m6 9 6 6 6-6"></path></svg>
+            </div>
+          </summary>
+          <div class="p-5 border-t border-slate-100 bg-white">
+            
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> What behaviors contribute to student success in the college environment?
+              </label>
+              <textarea oninput="handleReflectionInput(6, 0, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> What classroom expectations or learning norms stood out most to you?
+              </label>
+              <textarea oninput="handleReflectionInput(6, 1, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> How can you better prepare your students for these expectations?
+              </label>
+              <textarea oninput="handleReflectionInput(6, 2, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+          </div>
+        </details><details class="group bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm transition">
+          <summary class="p-4 cursor-pointer flex items-center justify-between bg-white hover:bg-slate-50 select-none transition">
+            <div class="flex items-center gap-3">
+              <div class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 text-xs font-bold flex items-center justify-center">
+                7
+              </div>
+              <span class="text-sm font-bold text-slate-800">7. Continuous Improvement &amp; Professional Growth</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">
+                Open Prompts
+              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"><path d="m6 9 6 6 6-6"></path></svg>
+            </div>
+          </summary>
+          <div class="p-5 border-t border-slate-100 bg-white">
+            
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> How do instructors stay current in their field and teaching practices?
+              </label>
+              <textarea oninput="handleReflectionInput(7, 0, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> What emerging trends or changes are impacting higher education and workforce preparation?
+              </label>
+              <textarea oninput="handleReflectionInput(7, 1, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> How can you encourage lifelong learning among your students?
+              </label>
+              <textarea oninput="handleReflectionInput(7, 2, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+          </div>
+        </details><details class="group bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm transition">
+          <summary class="p-4 cursor-pointer flex items-center justify-between bg-white hover:bg-slate-50 select-none transition">
+            <div class="flex items-center gap-3">
+              <div class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 text-xs font-bold flex items-center justify-center">
+                8
+              </div>
+              <span class="text-sm font-bold text-slate-800">8. Student Readiness for College</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">
+                Open Prompts
+              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"><path d="m6 9 6 6 6-6"></path></svg>
+            </div>
+          </summary>
+          <div class="p-5 border-t border-slate-100 bg-white">
+            
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> What skills and habits are most important for students entering college courses?
+              </label>
+              <textarea oninput="handleReflectionInput(8, 0, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> What common challenges do students face when transitioning from high school to college?
+              </label>
+              <textarea oninput="handleReflectionInput(8, 1, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> How can you address these challenges in your classroom?
+              </label>
+              <textarea oninput="handleReflectionInput(8, 2, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+          </div>
+        </details><details class="group bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm transition">
+          <summary class="p-4 cursor-pointer flex items-center justify-between bg-white hover:bg-slate-50 select-none transition">
+            <div class="flex items-center gap-3">
+              <div class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 text-xs font-bold flex items-center justify-center">
+                9
+              </div>
+              <span class="text-sm font-bold text-slate-800">9. Technology &amp; Digital Literacy</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">
+                Open Prompts
+              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"><path d="m6 9 6 6 6-6"></path></svg>
+            </div>
+          </summary>
+          <div class="p-5 border-t border-slate-100 bg-white">
+            
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> What instructional technologies are commonly used to support learning?
+              </label>
+              <textarea oninput="handleReflectionInput(9, 0, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> What digital skills are essential for student success in dual credit and college-level courses?
+              </label>
+              <textarea oninput="handleReflectionInput(9, 1, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> How can students further develop these skills in your classroom?
+              </label>
+              <textarea oninput="handleReflectionInput(9, 2, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+          </div>
+        </details><details class="group bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm transition">
+          <summary class="p-4 cursor-pointer flex items-center justify-between bg-white hover:bg-slate-50 select-none transition">
+            <div class="flex items-center gap-3">
+              <div class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 text-xs font-bold flex items-center justify-center">
+                10
+              </div>
+              <span class="text-sm font-bold text-slate-800">10. Career Readiness Integration</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">
+                Open Prompts
+              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"><path d="m6 9 6 6 6-6"></path></svg>
+            </div>
+          </summary>
+          <div class="p-5 border-t border-slate-100 bg-white">
+            
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> How are career readiness and employability skills incorporated into instruction?
+              </label>
+              <textarea oninput="handleReflectionInput(10, 0, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> What advice would you share with students preparing for college and future careers?
+              </label>
+              <textarea oninput="handleReflectionInput(10, 1, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> What changes will you make to better prepare students for postsecondary success?
+              </label>
+              <textarea oninput="handleReflectionInput(10, 2, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+          </div>
+        </details><details class="group bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm transition">
+          <summary class="p-4 cursor-pointer flex items-center justify-between bg-white hover:bg-slate-50 select-none transition">
+            <div class="flex items-center gap-3">
+              <div class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 text-xs font-bold flex items-center justify-center">
+                11
+              </div>
+              <span class="text-sm font-bold text-slate-800">11. Time Management &amp; Academic Priorities</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">
+                Open Prompts
+              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"><path d="m6 9 6 6 6-6"></path></svg>
+            </div>
+          </summary>
+          <div class="p-5 border-t border-slate-100 bg-white">
+            
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> How do instructors help students manage coursework and competing responsibilities?
+              </label>
+              <textarea oninput="handleReflectionInput(11, 0, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> What tools or systems are used to help students stay organized and track progress?
+              </label>
+              <textarea oninput="handleReflectionInput(11, 1, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> How can you incorporate time management and organizational skills into your courses?
+              </label>
+              <textarea oninput="handleReflectionInput(11, 2, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+          </div>
+        </details><details class="group bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm transition">
+          <summary class="p-4 cursor-pointer flex items-center justify-between bg-white hover:bg-slate-50 select-none transition">
+            <div class="flex items-center gap-3">
+              <div class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 text-xs font-bold flex items-center justify-center">
+                12
+              </div>
+              <span class="text-sm font-bold text-slate-800">12. Educational Technology &amp; Innovation</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">
+                Open Prompts
+              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"><path d="m6 9 6 6 6-6"></path></svg>
+            </div>
+          </summary>
+          <div class="p-5 border-t border-slate-100 bg-white">
+            
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> What educational technologies or learning platforms were utilized?
+              </label>
+              <textarea oninput="handleReflectionInput(12, 0, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> How do these tools enhance student learning and engagement?
+              </label>
+              <textarea oninput="handleReflectionInput(12, 1, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> How can you integrate similar technologies into your teaching?
+              </label>
+              <textarea oninput="handleReflectionInput(12, 2, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+          </div>
+        </details><details class="group bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm transition">
+          <summary class="p-4 cursor-pointer flex items-center justify-between bg-white hover:bg-slate-50 select-none transition">
+            <div class="flex items-center gap-3">
+              <div class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 text-xs font-bold flex items-center justify-center">
+                13
+              </div>
+              <span class="text-sm font-bold text-slate-800">13. Student Interactions &amp; Support Services</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">
+                Open Prompts
+              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"><path d="m6 9 6 6 6-6"></path></svg>
+            </div>
+          </summary>
+          <div class="p-5 border-t border-slate-100 bg-white">
+            
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> How do instructors build relationships and maintain effective communication with students?
+              </label>
+              <textarea oninput="handleReflectionInput(13, 0, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> What resources or services are available to support student success?
+              </label>
+              <textarea oninput="handleReflectionInput(13, 1, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> How can you better connect students with available resources and support systems?
+              </label>
+              <textarea oninput="handleReflectionInput(13, 2, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+          </div>
+        </details><details class="group bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm transition">
+          <summary class="p-4 cursor-pointer flex items-center justify-between bg-white hover:bg-slate-50 select-none transition">
+            <div class="flex items-center gap-3">
+              <div class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 text-xs font-bold flex items-center justify-center">
+                14
+              </div>
+              <span class="text-sm font-bold text-slate-800">14. Academic Programs &amp; Career Pathways</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">
+                Open Prompts
+              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"><path d="m6 9 6 6 6-6"></path></svg>
+            </div>
+          </summary>
+          <div class="p-5 border-t border-slate-100 bg-white">
+            
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> How do academic programs align with workforce and career opportunities?
+              </label>
+              <textarea oninput="handleReflectionInput(14, 0, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> How do faculty connect course content to career pathways and industry expectations?
+              </label>
+              <textarea oninput="handleReflectionInput(14, 1, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> How can you help students better understand educational and career pathways?
+              </label>
+              <textarea oninput="handleReflectionInput(14, 2, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+          </div>
+        </details><details class="group bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm transition">
+          <summary class="p-4 cursor-pointer flex items-center justify-between bg-white hover:bg-slate-50 select-none transition">
+            <div class="flex items-center gap-3">
+              <div class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 text-xs font-bold flex items-center justify-center">
+                15
+              </div>
+              <span class="text-sm font-bold text-slate-800">15. Accountability &amp; Student Responsibility</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">
+                Open Prompts
+              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"><path d="m6 9 6 6 6-6"></path></svg>
+            </div>
+          </summary>
+          <div class="p-5 border-t border-slate-100 bg-white">
+            
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> How do instructors encourage accountability for assignments and learning outcomes?
+              </label>
+              <textarea oninput="handleReflectionInput(15, 0, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> What does student ownership of learning look like in the college environment?
+              </label>
+              <textarea oninput="handleReflectionInput(15, 1, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">•</span> How can you foster greater responsibility and self-advocacy among your students?
+              </label>
+              <textarea oninput="handleReflectionInput(15, 2, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50"></textarea>
+            </div>
+          
+          </div>
+        </details></div>
+
+    </div>
+
+    <div id="tab-actionplan" class="tab-content hidden space-y-6">
+      
+      <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-4">
+          <div>
+            <span class="text-xs font-bold text-lit-red uppercase tracking-wider">Culminating Deliverable</span>
+            <h2 class="text-xl font-bold text-lit-navy">Final Reflection &amp; 3-Point Action Plan</h2>
+            <p class="text-xs text-slate-500 mt-1">Synthesize your observations, mentor discussions, and Blackboard peer interactions into your December 3rd finale plan.</p>
+          </div>
+          <span class="hidden sm:inline-flex items-center gap-1 px-3 py-1 bg-amber-50 text-amber-800 border border-amber-200 rounded-lg text-xs font-bold">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" aria-hidden="true" class="lucide lucide-check-circle w-3.5 h-3.5"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> Qualifies for Stipend
+          </span>
+        </div>
+
+        <p class="text-sm font-semibold text-slate-700 mb-3">
+          What are the top three changes you will make to your teaching based on this LIT externship experience?
+        </p>
+
+        <!-- 3 Top Changes Inputs -->
+        <div class="space-y-4">
+          <!-- Change 1 -->
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-6 h-6 rounded-full bg-lit-navy text-white text-xs font-bold flex items-center justify-center">1</span>
+              <label class="text-xs font-bold text-slate-800 uppercase tracking-wide">Key Change #1: Instruction &amp; Rigor Alignment</label>
+            </div>
+            <textarea id="action-plan-1" oninput="saveActionPlan()" rows="2" placeholder="e.g., Introduce college-style syllabus rubrics and independent critical thinking labs modeled after LIT's applied learning sessions." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-white"></textarea>
+          </div>
+
+          <!-- Change 2 -->
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-6 h-6 rounded-full bg-lit-blue text-white text-xs font-bold flex items-center justify-center">2</span>
+              <label class="text-xs font-bold text-slate-800 uppercase tracking-wide">Key Change #2: Technology &amp; Student Responsibility</label>
+            </div>
+            <textarea id="action-plan-2" oninput="saveActionPlan()" rows="2" placeholder="e.g., Integrate digital submission protocols and student self-advocacy deadlines mirroring college LMS accountability standards." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-white"></textarea>
+          </div>
+
+          <!-- Change 3 -->
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-6 h-6 rounded-full bg-lit-red text-white text-xs font-bold flex items-center justify-center">3</span>
+              <label class="text-xs font-bold text-slate-800 uppercase tracking-wide">Key Change #3: Industry &amp; Career Pathways Navigation</label>
+            </div>
+            <textarea id="action-plan-3" oninput="saveActionPlan()" rows="2" placeholder="e.g., Connect dual credit projects to real-world industrial certifications and showcase LIT technical career paths directly in my high school syllabus." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-white"></textarea>
+          </div>
+        </div>
+
+        <!-- Presentation Slide / Summary Preview Generator -->
+        <div class="mt-6 pt-6 border-t border-slate-200">
+          <div class="flex items-center justify-between mb-3">
+            <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="file-text" aria-hidden="true" class="lucide lucide-file-text w-4 h-4 text-lit-blue"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>
+              December 3rd Finale Presentation Outline Card
+            </h4>
+            <button onclick="copyPresentationOutline()" class="text-xs font-semibold text-lit-blue hover:text-lit-navy flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="copy" aria-hidden="true" class="lucide lucide-copy w-3.5 h-3.5"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg> Copy Slide Outline
+            </button>
+          </div>
+          
+          <div id="presentation-summary-box" class="p-4 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs leading-relaxed overflow-x-auto">
+<span class="text-lit-red font-bold">LIT Teacher Externship Finale Presentation Outline • Dec 3rd</span>
+Educator: <span class="text-amber-300 font-bold">Type your name</span> (Beaumont ISD - High School Dual Credit)
+Mentor Interaction: <span class="text-blue-300 font-bold">2.5 Hours Logged</span> | Days Active: <span class="text-blue-300 font-bold">2/8</span>
+
+<span class="text-slate-400 underline uppercase text-[10px]">Culminating Action Commitments:</span>
+1. INSTRUCTIONAL STRATEGY:
+   • [Planned Change 1: High School to Dual Credit Rigor Integration]
+
+2. STUDENT OWNERSHIP &amp; TECH:
+   • [Planned Change 2: Digital Systems &amp; Student Accountability]
+
+3. CAREER &amp; INDUSTRY PATHWAYS:
+   • [Planned Change 3: Workforce &amp; Industry Pathways Exposure]
+      </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div id="tab-quiz" class="tab-content hidden space-y-6">
+      
+      <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm max-w-3xl mx-auto">
+        <div class="text-center pb-4 border-b border-slate-100 mb-6">
+          <div class="inline-flex p-3 rounded-full bg-red-50 text-lit-red mb-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="help-circle" aria-hidden="true" class="lucide lucide-help-circle w-8 h-8"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg>
+          </div>
+          <h2 class="text-2xl font-bold text-lit-navy">Externship Milestone &amp; Audit Quiz</h2>
+          <p class="text-xs text-slate-500 mt-1 max-w-md mx-auto">
+            This quick 5-question verification checks off your 8-day commitment, 4-hour mentor interaction, learning outcomes, and December presentation plan. Score 100% to unlock your official Certificate.
+          </p>
+        </div>
+
+        <form id="quiz-form" onsubmit="handleQuizSubmit(event)" class="space-y-6">
+          
+          <!-- Question 1 -->
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <p class="text-xs sm:text-sm font-semibold text-slate-800 mb-3">
+              1. What is the minimum required duration of direct 1-on-1 interaction with your assigned LIT mentor?
+            </p>
+            <div class="space-y-2">
+              <label class="flex items-center gap-3 text-xs text-slate-700 p-2 rounded-lg hover:bg-white cursor-pointer transition">
+                <input type="radio" name="q1" value="2" class="text-lit-blue focus:ring-lit-blue">
+                <span>A) 2 Hours of interaction</span>
+              </label>
+              <label class="flex items-center gap-3 text-xs text-slate-700 p-2 rounded-lg hover:bg-white cursor-pointer transition">
+                <input type="radio" name="q1" value="4" class="text-lit-blue focus:ring-lit-blue">
+                <span class="font-medium">B) A minimum of 4 Hours of engagement (virtual or in-person)</span>
+              </label>
+              <label class="flex items-center gap-3 text-xs text-slate-700 p-2 rounded-lg hover:bg-white cursor-pointer transition">
+                <input type="radio" name="q1" value="10" class="text-lit-blue focus:ring-lit-blue">
+                <span>C) 10 Hours of weekly observation</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 2 -->
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <p class="text-xs sm:text-sm font-semibold text-slate-800 mb-3">
+              2. Over what timeframe is the 8-Day externship commitment distributed?
+            </p>
+            <div class="space-y-2">
+              <label class="flex items-center gap-3 text-xs text-slate-700 p-2 rounded-lg hover:bg-white cursor-pointer transition">
+                <input type="radio" name="q2" value="consecutive" class="text-lit-blue focus:ring-lit-blue">
+                <span>A) 8 consecutive calendar days in October</span>
+              </label>
+              <label class="flex items-center gap-3 text-xs text-slate-700 p-2 rounded-lg hover:bg-white cursor-pointer transition">
+                <input type="radio" name="q2" value="distributed" class="text-lit-blue focus:ring-lit-blue">
+                <span class="font-medium">B) Strategically scheduled across the active window from October 1st through December 3rd</span>
+              </label>
+              <label class="flex items-center gap-3 text-xs text-slate-700 p-2 rounded-lg hover:bg-white cursor-pointer transition">
+                <input type="radio" name="q2" value="spring" class="text-lit-blue focus:ring-lit-blue">
+                <span>C) Any 8 days during the Spring semester</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 3 -->
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <p class="text-xs sm:text-sm font-semibold text-slate-800 mb-3">
+              3. Which core evidence areas are externs expected to collect during their observations?
+            </p>
+            <div class="space-y-2">
+              <label class="flex items-center gap-3 text-xs text-slate-700 p-2 rounded-lg hover:bg-white cursor-pointer transition">
+                <input type="radio" name="q3" value="all" class="text-lit-blue focus:ring-lit-blue">
+                <span class="font-medium">A) LMS observations, faculty interviews &amp; syllabus reviews, campus support services, and educational tech tools</span>
+              </label>
+              <label class="flex items-center gap-3 text-xs text-slate-700 p-2 rounded-lg hover:bg-white cursor-pointer transition">
+                <input type="radio" name="q3" value="only_grades" class="text-lit-blue focus:ring-lit-blue">
+                <span>B) Only student grade transcripts</span>
+              </label>
+              <label class="flex items-center gap-3 text-xs text-slate-700 p-2 rounded-lg hover:bg-white cursor-pointer transition">
+                <input type="radio" name="q3" value="textbooks" class="text-lit-blue focus:ring-lit-blue">
+                <span>C) Textbook receipts only</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 4 -->
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <p class="text-xs sm:text-sm font-semibold text-slate-800 mb-3">
+              4. How do externs maintain collaborative peer engagement throughout the program?
+            </p>
+            <div class="space-y-2">
+              <label class="flex items-center gap-3 text-xs text-slate-700 p-2 rounded-lg hover:bg-white cursor-pointer transition">
+                <input type="radio" name="q4" value="blackboard" class="text-lit-blue focus:ring-lit-blue">
+                <span class="font-medium">A) Actively participating in Blackboard online discussion forums and sharing reflections</span>
+              </label>
+              <label class="flex items-center gap-3 text-xs text-slate-700 p-2 rounded-lg hover:bg-white cursor-pointer transition">
+                <input type="radio" name="q4" value="none" class="text-lit-blue focus:ring-lit-blue">
+                <span>B) No interaction is needed with fellow externs</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 5 -->
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <p class="text-xs sm:text-sm font-semibold text-slate-800 mb-3">
+              5. What is the required culminating event on December 3rd to qualify for the program stipend and completion?
+            </p>
+            <div class="space-y-2">
+              <label class="flex items-center gap-3 text-xs text-slate-700 p-2 rounded-lg hover:bg-white cursor-pointer transition">
+                <input type="radio" name="q5" value="presentation" class="text-lit-blue focus:ring-lit-blue">
+                <span class="font-medium">A) Sharing the Final Action Plan and pedagogical takeaways in the Final Presentation Showcase</span>
+              </label>
+              <label class="flex items-center gap-3 text-xs text-slate-700 p-2 rounded-lg hover:bg-white cursor-pointer transition">
+                <input type="radio" name="q5" value="written_test" class="text-lit-blue focus:ring-lit-blue">
+                <span>B) Taking a 3-hour written exam at LIT</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Quiz Feedback Toast -->
+          <div id="quiz-alert" class="hidden p-3 rounded-lg text-xs font-semibold"></div>
+
+          <div class="pt-2 flex justify-between items-center">
+            <button type="button" onclick="autoFillPassingQuiz()" class="text-xs text-slate-400 hover:text-slate-600 underline">
+              Fast Audit Auto-Check
+            </button>
+            <button type="submit" class="px-6 py-2.5 bg-lit-navy hover:bg-slate-800 text-white text-xs sm:text-sm font-bold rounded-xl transition shadow flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" aria-hidden="true" class="lucide lucide-check-circle w-4 h-4"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> Submit &amp; Verify Completion
+            </button>
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <div id="certificate-modal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full my-auto overflow-hidden border border-slate-200">
+      
+      <!-- Modal Control Bar -->
+      <div class="bg-slate-800 text-white px-6 py-3 flex items-center justify-between no-print">
+        <div class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="award" aria-hidden="true" class="lucide lucide-award w-5 h-5 text-amber-400"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"></path><circle cx="12" cy="8" r="6"></circle></svg>
+          <span class="text-sm font-bold">LIT Externship Official Certificate of Achievement</span>
+          <span class="text-[11px] bg-slate-700 text-slate-300 px-2 py-0.5 rounded-full hidden sm:inline-flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit-3" aria-hidden="true" class="lucide lucide-edit-3 w-3 h-3 text-amber-400"><path d="M13 21h8"></path><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path></svg> Click name on certificate to edit
+          </span>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="window.print()" class="px-3 py-1.5 bg-lit-blue hover:bg-blue-600 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="printer" aria-hidden="true" class="lucide lucide-printer w-3.5 h-3.5"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"></path><rect x="6" y="14" width="12" height="8" rx="1"></rect></svg> Print / Save PDF
+          </button>
+          <button onclick="closeCertificateModal()" class="text-slate-300 hover:text-white p-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" aria-hidden="true" class="lucide lucide-x w-5 h-5"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="printable-certificate" class="p-6 sm:p-10 bg-[#FFFEFA] relative cert-frame m-3 sm:m-6 shadow-md text-center selection:bg-amber-100">
+        
+        <!-- Watermark / Star background -->
+        <div class="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none">
+          <svg viewBox="0 0 100 100" class="w-[500px] h-[500px]">
+            <polygon points="50,6 59,34 89,34 65,51 74,79 50,62 26,79 35,51 11,34 41,34" fill="#002B66"></polygon>
+          </svg>
+        </div>
+
+        <!-- Header Logos & Institution Name -->
+        <div class="flex flex-col items-center justify-center mb-4">
+          <div class="w-16 h-16 mb-2">
+            <!-- LIT Official Logo Emblem -->
+            <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-sm">
+              <path d="M12 12 H42 V70 H78 V88 H12 Z" fill="#002B66"></path>
+              <polygon points="50,6 59,34 89,34 65,51 74,79 50,62 26,79 35,51 11,34 41,34" fill="#C8102E" transform="scale(0.48) translate(38, -5)"></polygon>
+              <path d="M52 30 H92 V46 H76 V88 H58 V46 H52 Z" fill="#002B66"></path>
+            </svg>
+          </div>
+          <h2 class="font-cinzel text-xl sm:text-2xl font-bold tracking-widest text-lit-navy uppercase">
+            Lamar Institute of Technology
+          </h2>
+          <p class="text-xs uppercase tracking-widest text-lit-red font-bold mt-0.5">
+            Instruction to Industry Externship Program • Dual Credit Pathway
+          </p>
+        </div>
+
+        <!-- Certificate Title -->
+        <div class="my-4">
+          <h1 class="font-serif italic text-3xl sm:text-4xl text-slate-800 font-normal">
+            Certificate of Completion &amp; Achievement
+          </h1>
+          <div class="w-32 h-0.5 bg-gradient-to-r from-transparent via-lit-red to-transparent mx-auto mt-2"></div>
+        </div>
+
+        <p class="text-xs sm:text-sm text-slate-600 font-sans mt-3">This credential certifies with highest distinction that</p>
+
+        <!-- Recipient Name (Editable directly on certificate) -->
+        <div class="my-4 relative group inline-block max-w-full">
+          <h3 id="cert-recipient-name" contenteditable="true" spellcheck="false" title="Click to edit recipient name" oninput="handleCertNameInput(this.innerText)" class="font-serif text-2xl sm:text-4xl font-bold text-lit-navy tracking-tight underline decoration-lit-red decoration-2 underline-offset-8 px-4 py-1 rounded transition hover:bg-amber-50/60 focus:bg-amber-50 focus:outline-none focus:ring-1 focus:ring-amber-400 cursor-text inline-block min-w-[280px]">Type your name</h3>
+          <span class="no-print opacity-0 group-hover:opacity-100 transition-opacity absolute -top-3 right-0 text-[10px] bg-slate-800 text-white px-1.5 py-0.5 rounded shadow pointer-events-none flex items-center gap-1 font-sans">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit-2" aria-hidden="true" class="lucide lucide-edit-2 w-2.5 h-2.5"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path></svg> click to edit
+          </span>
+          <p id="cert-recipient-school" contenteditable="true" spellcheck="false" title="Click to edit school/district" oninput="handleCertSchoolInput(this.innerText)" class="text-xs text-slate-600 font-medium mt-3 italic px-3 py-0.5 rounded transition hover:bg-amber-50/60 focus:bg-amber-50 focus:outline-none focus:ring-1 focus:ring-amber-400 cursor-text">Beaumont ISD - High School Dual Credit • Career &amp; Technical Education</p>
+        </div>
+
+        <!-- Description of Accomplishment -->
+        <p class="text-xs sm:text-sm text-slate-700 max-w-2xl mx-auto leading-relaxed mt-4">
+          has successfully fulfilled all academic and professional standards for the 
+          <span class="font-bold text-lit-navy">LIT Teacher Externship Program</span>. This includes completing 
+          an <span class="font-bold text-lit-navy">8-Day distributed active immersion</span>, 
+          <span class="font-bold text-lit-navy">4+ hours of collaborative LIT mentor engagement</span>, 
+          in-depth analysis across 15 core instructional domains, and formulating an applied 
+          Instructional Action Plan for postsecondary student transitions.
+        </p>
+
+        <!-- Signatures & Verification Badge with Current LIT Leadership -->
+        <div class="grid grid-cols-3 items-end mt-10 pt-4 border-t border-slate-200">
+          
+          <!-- LIT Provost / Vice President for Instruction -->
+          <div class="text-center">
+            <div class="font-handwriting text-2xl text-slate-800 -mb-1">Dr. Angela J. Hill</div>
+            <div class="w-44 h-px bg-slate-400 mx-auto mb-1"></div>
+            <p class="text-[10px] uppercase tracking-wider font-bold text-slate-800">Dr. Angela J. Hill, Ph.D.</p>
+            <p class="text-[9px] text-slate-500 font-medium">Provost &amp; Vice President for Instruction</p>
+            <p class="text-[8px] text-slate-400">Lamar Institute of Technology</p>
+          </div>
+
+          <!-- Official Gold Embossed Stamp Graphic -->
+          <div class="flex flex-col items-center justify-center">
+            <div class="w-20 h-20 rounded-full border-4 border-amber-500 bg-amber-50 flex flex-col items-center justify-center shadow-inner relative p-1">
+              <div class="w-full h-full rounded-full border border-dashed border-amber-600 flex flex-col items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="award" aria-hidden="true" class="lucide lucide-award w-6 h-6 text-amber-600"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"></path><circle cx="12" cy="8" r="6"></circle></svg>
+                <span class="text-[7px] font-extrabold uppercase tracking-tighter text-amber-800 leading-tight">OFFICIAL SEAL</span>
+                <span class="text-[8px] font-bold text-lit-navy">2026 LIT</span>
+              </div>
+            </div>
+            <span id="cert-date-issued" class="text-[9px] text-slate-500 mt-1 font-mono">Issued: December 3, 2026</span>
+          </div>
+
+          <!-- LIT President -->
+          <div class="text-center">
+            <div class="font-handwriting text-2xl text-slate-800 -mb-1">Dr. Sidney E. Valentine</div>
+            <div class="w-44 h-px bg-slate-400 mx-auto mb-1"></div>
+            <p class="text-[10px] uppercase tracking-wider font-bold text-slate-800">Dr. Sidney E. Valentine, Ph.D.</p>
+            <p class="text-[9px] text-slate-500 font-medium">President</p>
+            <p class="text-[8px] text-slate-400">Lamar Institute of Technology</p>
+          </div>
+
+        </div>
+
+        <div class="mt-6 text-[8px] text-slate-400 tracking-wider uppercase">
+          Verification ID: LIT-EXT-2026-<span id="cert-random-id">4140</span> • Verified via LIT Instruction to Industry Portal
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div id="toast" class="fixed bottom-5 right-5 z-50 max-w-sm w-full bg-slate-900 text-white text-xs px-4 py-3 rounded-xl shadow-xl border border-slate-700 flex items-center justify-between transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none">
+    <div class="flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" id="toast-icon" class="lucide lucide-check w-4 h-4 text-emerald-400"><path d="M20 6 9 17l-5-5"></path></svg>
+      <span id="toast-message">Note: Take the 5-question audit quiz to verify full completion.</span>
+    </div>
+    <button onclick="hideToast()" class="text-slate-400 hover:text-white ml-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" aria-hidden="true" class="lucide lucide-x w-3.5 h-3.5"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+    </button>
+  </div>
+
+  <footer class="bg-white border-t border-slate-200 mt-12 py-6 text-slate-500 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-lit-navy">Lamar Institute of Technology</span>
+        <span>•</span>
+        <span>Instruction to Industry Externship</span>
+      </div>
+      <div class="text-slate-400 text-center sm:text-right">
+        <span>Active Commitment Window: Oct 1 – Dec 3 • Presentation Finale</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initial State Structure
+    const appState = {
+      profile: {
+        name: 'Sarah Jenkins, M.Ed.',
+        school: 'Beaumont ISD - High School Dual Credit'
+      },
+      evidence: {
+        lms: false,
+        faculty: false,
+        support: false,
+        tech: false
+      },
+      days: [
+        { day: 1, title: 'Orientation & Mentor Alignment', date: 'Oct 02', hours: 0.5, completed: true, focus: 'Blackboard setup & 1-on-1 goal review' },
+        { day: 2, title: 'LMS & Syllabus Observations', date: 'Oct 10', hours: 0.5, completed: true, focus: 'Dual credit course structure and outcomes' },
+        { day: 3, title: 'Classroom Instruction Shadow', date: 'Oct 18', hours: 0.5, completed: false, focus: 'Observing lecture & active lab dynamics' },
+        { day: 4, title: 'Faculty & Student Interviews', date: 'Oct 26', hours: 0.5, completed: false, focus: 'Student self-advocacy & faculty support' },
+        { day: 5, title: 'Campus Support Services Tour', date: 'Nov 04', hours: 0.5, completed: false, focus: 'Tutoring, testing, disability services' },
+        { day: 6, title: 'Tech Tools & Lab Equipment', date: 'Nov 12', hours: 0.5, completed: false, focus: 'Evaluating digital simulation platforms' },
+        { day: 7, title: 'Pedagogy Synthesis & Draft', date: 'Nov 20', hours: 0.5, completed: false, focus: 'Drafting Top 3 classroom changes' },
+        { day: 8, title: 'Dec 3rd Finale Presentation', date: 'Dec 03', hours: 0.5, completed: false, focus: 'Showcase action plan & receive stipend' }
+      ],
+      mentorTimeTotal: 2.5, // Total hours logged with mentor
+      reflections: {},      // Populated dynamically from 15 sections
+      actionPlan: {
+        change1: '',
+        change2: '',
+        change3: ''
+      },
+      quizPassed: false
+    };
+
+    // 15 Standard Sections from the Teacher Externship Workbook
+    const workbookData = [
+      {
+        id: 1,
+        cat: 'pedagogy',
+        title: '1. Observing College-Level Instruction',
+        questions: [
+          'What instructional strategies did you observe that were most effective in engaging students?',
+          'How do LIT instructors balance academic rigor with student support?',
+          'How can you incorporate these strategies into your dual credit courses?'
+        ]
+      },
+      {
+        id: 2,
+        cat: 'pedagogy',
+        title: '2. Course Structure & Learning Processes',
+        questions: [
+          'Describe a typical class session or learning activity you observed.',
+          'What methods are used to organize coursework, assignments, and student expectations?',
+          'How can you adapt these practices to your classroom?'
+        ]
+      },
+      {
+        id: 3,
+        cat: 'pedagogy',
+        title: '3. Communication & Student Engagement',
+        questions: [
+          'What communication practices appear most effective between instructors and students?',
+          'How do instructors communicate expectations regarding assignments, participation, and professionalism?',
+          'How can you model these expectations for your students?'
+        ]
+      },
+      {
+        id: 4,
+        cat: 'pedagogy',
+        title: '4. Collaboration & Student Success',
+        questions: [
+          'How do faculty collaborate with colleagues, advisors, and student support services?',
+          'What strategies are used to provide feedback and support student growth?',
+          'How can you incorporate collaboration and feedback opportunities into your classroom?'
+        ]
+      },
+      {
+        id: 5,
+        cat: 'pedagogy',
+        title: '5. Critical Thinking & Application of Knowledge',
+        questions: [
+          'Describe an activity or lesson that encouraged critical thinking and problem-solving.',
+          'What instructional approaches helped students apply concepts to real-world situations?',
+          'How can you incorporate similar opportunities into your dual credit courses?'
+        ]
+      },
+      {
+        id: 6,
+        cat: 'culture',
+        title: '6. College Expectations & Learning Culture',
+        questions: [
+          'What behaviors contribute to student success in the college environment?',
+          'What classroom expectations or learning norms stood out most to you?',
+          'How can you better prepare your students for these expectations?'
+        ]
+      },
+      {
+        id: 7,
+        cat: 'culture',
+        title: '7. Continuous Improvement & Professional Growth',
+        questions: [
+          'How do instructors stay current in their field and teaching practices?',
+          'What emerging trends or changes are impacting higher education and workforce preparation?',
+          'How can you encourage lifelong learning among your students?'
+        ]
+      },
+      {
+        id: 8,
+        cat: 'culture',
+        title: '8. Student Readiness for College',
+        questions: [
+          'What skills and habits are most important for students entering college courses?',
+          'What common challenges do students face when transitioning from high school to college?',
+          'How can you address these challenges in your classroom?'
+        ]
+      },
+      {
+        id: 9,
+        cat: 'tech',
+        title: '9. Technology & Digital Literacy',
+        questions: [
+          'What instructional technologies are commonly used to support learning?',
+          'What digital skills are essential for student success in dual credit and college-level courses?',
+          'How can students further develop these skills in your classroom?'
+        ]
+      },
+      {
+        id: 10,
+        cat: 'tech',
+        title: '10. Career Readiness Integration',
+        questions: [
+          'How are career readiness and employability skills incorporated into instruction?',
+          'What advice would you share with students preparing for college and future careers?',
+          'What changes will you make to better prepare students for postsecondary success?'
+        ]
+      },
+      {
+        id: 11,
+        cat: 'tech',
+        title: '11. Time Management & Academic Priorities',
+        questions: [
+          'How do instructors help students manage coursework and competing responsibilities?',
+          'What tools or systems are used to help students stay organized and track progress?',
+          'How can you incorporate time management and organizational skills into your courses?'
+        ]
+      },
+      {
+        id: 12,
+        cat: 'tech',
+        title: '12. Educational Technology & Innovation',
+        questions: [
+          'What educational technologies or learning platforms were utilized?',
+          'How do these tools enhance student learning and engagement?',
+          'How can you integrate similar technologies into your teaching?'
+        ]
+      },
+      {
+        id: 13,
+        cat: 'pathways',
+        title: '13. Student Interactions & Support Services',
+        questions: [
+          'How do instructors build relationships and maintain effective communication with students?',
+          'What resources or services are available to support student success?',
+          'How can you better connect students with available resources and support systems?'
+        ]
+      },
+      {
+        id: 14,
+        cat: 'pathways',
+        title: '14. Academic Programs & Career Pathways',
+        questions: [
+          'How do academic programs align with workforce and career opportunities?',
+          'How do faculty connect course content to career pathways and industry expectations?',
+          'How can you help students better understand educational and career pathways?'
+        ]
+      },
+      {
+        id: 15,
+        cat: 'pathways',
+        title: '15. Accountability & Student Responsibility',
+        questions: [
+          'How do instructors encourage accountability for assignments and learning outcomes?',
+          'What does student ownership of learning look like in the college environment?',
+          'How can you foster greater responsibility and self-advocacy among your students?'
+        ]
+      }
+    ];
+
+    window.addEventListener('DOMContentLoaded', () => {
+      // Set default profile inputs
+      const nameInput = document.getElementById('input-extern-name');
+      const schoolInput = document.getElementById('input-extern-school');
+      if (nameInput) nameInput.value = appState.profile.name;
+      if (schoolInput) schoolInput.value = appState.profile.school;
+      updateProfileDisplay();
+
+      // Render 8 Days Grid
+      renderDaysTracker();
+
+      // Render 15 Workbook Accordions
+      renderWorkbookSections();
+
+      // Recalculate Mentor Hours
+      recalculateHoursFromTable();
+
+      // Render Presentation Outline Card
+      updatePresentationOutline();
+
+      // Recalculate Overall Progress
+      recalculateOverallProgress();
+
+      // Initialize Lucide icons
+      lucide.createIcons();
+    });
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      const activeContent = document.getElementById('tab-' + tabId);
+      if (activeContent) activeContent.classList.remove('hidden');
+
+      // Update Tab Buttons UI
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('border-lit-blue', 'text-lit-blue', 'bg-white', 'shadow-sm', 'font-semibold');
+        btn.classList.add('border-transparent', 'text-slate-600', 'font-medium');
+      });
+
+      const activeBtn = document.getElementById('tab-btn-' + tabId);
+      if (activeBtn) {
+        activeBtn.classList.add('border-lit-blue', 'text-lit-blue', 'bg-white', 'shadow-sm', 'font-semibold');
+        activeBtn.classList.remove('border-transparent', 'text-slate-600');
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderDaysTracker() {
+      const container = document.getElementById('days-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      appState.days.forEach((item, index) => {
+        const isDone = item.completed;
+        const card = document.createElement('div');
+        card.className = `p-4 rounded-xl border transition-all ${
+          isDone ? 'bg-blue-50/60 border-blue-200' : 'bg-white border-slate-200 shadow-sm'
+        }`;
+
+        card.innerHTML = `
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[11px] font-bold uppercase tracking-wider ${isDone ? 'text-lit-blue' : 'text-slate-400'}">
+              Day 0${item.day} &bull; ${item.date}
+            </span>
+            <input type="checkbox" ${isDone ? 'checked' : ''} onchange="toggleDayComplete(${index}, this.checked)" class="w-4 h-4 text-lit-blue rounded focus:ring-lit-blue">
+          </div>
+          <h4 class="text-xs font-bold text-slate-800 mb-1 leading-snug">${item.title}</h4>
+          <p class="text-[11px] text-slate-500 mb-3">${item.focus}</p>
+          <div class="flex items-center justify-between text-[11px] border-t border-slate-200/60 pt-2 text-slate-600">
+            <span>Status:</span>
+            <span class="font-bold ${isDone ? 'text-lit-blue' : 'text-slate-400'}">
+              ${isDone ? 'Completed' : 'Pending'}
+            </span>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function toggleDayComplete(index, isChecked) {
+      appState.days[index].completed = isChecked;
+      renderDaysTracker();
+      recalculateOverallProgress();
+      showToast(isChecked ? `Day ${index + 1} marked as completed!` : `Day ${index + 1} marked pending.`);
+    }
+
+    function recalculateHoursFromTable() {
+      const selects = document.querySelectorAll('.mentor-duration-select');
+      let total = 0;
+      selects.forEach(sel => {
+        total += parseFloat(sel.value || 0);
+      });
+      appState.mentorTimeTotal = total;
+
+      const totalDisplay = document.getElementById('tracker-mentor-total');
+      const badgeText = document.getElementById('badge-hours-text');
+      const dashHoursVal = document.getElementById('dash-hours-val');
+      const dashHoursBar = document.getElementById('dash-hours-bar');
+
+      if (totalDisplay) totalDisplay.innerText = `${total.toFixed(1)} / 4.0 hrs`;
+      if (badgeText) badgeText.innerText = `${total.toFixed(1)}/4.0 Mentor Hrs`;
+      if (dashHoursVal) dashHoursVal.innerText = `${total.toFixed(1)} hrs`;
+      
+      const pct = Math.min(100, Math.round((total / 4.0) * 100));
+      if (dashHoursBar) dashHoursBar.style.width = `${pct}%`;
+
+      recalculateOverallProgress();
+    }
+
+    function addMentorLogEntry() {
+      const container = document.getElementById('mentor-logs-list');
+      const count = container.children.length + 1;
+      const row = document.createElement('div');
+      row.className = "p-3.5 rounded-lg border border-slate-200 bg-slate-50 grid grid-cols-1 md:grid-cols-12 gap-3 items-center";
+      row.innerHTML = `
+        <div class="md:col-span-2">
+          <label class="block text-[10px] font-semibold text-slate-500 uppercase">Format & Date</label>
+          <input type="text" value="Session ${count} - Meeting" class="text-xs font-semibold text-slate-800 bg-white border border-slate-300 rounded px-2 py-1 w-full">
+        </div>
+        <div class="md:col-span-2">
+          <label class="block text-[10px] font-semibold text-slate-500 uppercase">Duration (Hours)</label>
+          <select onchange="recalculateHoursFromTable()" class="mentor-duration-select text-xs font-semibold text-slate-800 bg-white border border-slate-300 rounded px-2 py-1 w-full">
+            <option value="1.0" selected>1.0 Hour</option>
+            <option value="1.5">1.5 Hours</option>
+            <option value="2.0">2.0 Hours</option>
+            <option value="0.5">0.5 Hour</option>
+          </select>
+        </div>
+        <div class="md:col-span-7">
+          <label class="block text-[10px] font-semibold text-slate-500 uppercase">Key Discussions & Applied Solutions</label>
+          <input type="text" placeholder="Detail pedagogical takeaways and mentorship advice" class="text-xs text-slate-800 bg-white border border-slate-300 rounded px-2 py-1 w-full">
+        </div>
+        <div class="md:col-span-1 text-right">
+          <button onclick="this.closest('.p-3.5').remove(); recalculateHoursFromTable();" class="text-slate-400 hover:text-lit-red p-1">
+            <i data-lucide="trash-2" class="w-4 h-4"></i>
+          </button>
+        </div>
+      `;
+      container.appendChild(row);
+      lucide.createIcons();
+      recalculateHoursFromTable();
+      showToast('New mentor meeting session row added.');
+    }
+
+    function renderWorkbookSections(filter = 'all') {
+      const container = document.getElementById('workbook-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      workbookData.forEach((section) => {
+        if (filter !== 'all' && section.cat !== filter) return;
+
+        const isAnswered = appState.reflections[section.id] && appState.reflections[section.id].length > 10;
+        const details = document.createElement('details');
+        details.className = "group bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm transition";
+
+        let questionsHtml = '';
+        section.questions.forEach((q, qIdx) => {
+          const currentVal = (appState.reflections[`${section.id}_q${qIdx}`] || '');
+          questionsHtml += `
+            <div class="mb-4">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-start gap-1.5">
+                <span class="text-lit-red font-bold">&bull;</span> ${q}
+              </label>
+              <textarea oninput="handleReflectionInput(${section.id}, ${qIdx}, this.value)" rows="2" placeholder="Record your observations and personal reflection..." class="w-full text-xs text-slate-800 p-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-lit-blue bg-slate-50/50">${currentVal}</textarea>
+            </div>
+          `;
+        });
+
+        details.innerHTML = `
+          <summary class="p-4 cursor-pointer flex items-center justify-between bg-white hover:bg-slate-50 select-none transition">
+            <div class="flex items-center gap-3">
+              <div class="w-7 h-7 rounded-full ${isAnswered ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-100 text-slate-600'} text-xs font-bold flex items-center justify-center">
+                ${section.id}
+              </div>
+              <span class="text-sm font-bold text-slate-800">${section.title}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full ${isAnswered ? 'bg-emerald-50 text-emerald-700' : 'bg-slate-100 text-slate-500'}">
+                ${isAnswered ? 'Reflected' : 'Open Prompts'}
+              </span>
+              <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"></i>
+            </div>
+          </summary>
+          <div class="p-5 border-t border-slate-100 bg-white">
+            ${questionsHtml}
+          </div>
+        `;
+        container.appendChild(details);
+      });
+
+      lucide.createIcons();
+    }
+
+    function filterWorkbookCategories(cat) {
+      renderWorkbookSections(cat);
+    }
+
+    function handleReflectionInput(sectionId, qIdx, value) {
+      appState.reflections[`${sectionId}_q${qIdx}`] = value;
+      // Mark parent as answered if at least one question has content
+      appState.reflections[sectionId] = value;
+      recalculateOverallProgress();
+    }
+
+    function saveActionPlan() {
+      const p1 = document.getElementById('action-plan-1')?.value || '';
+      const p2 = document.getElementById('action-plan-2')?.value || '';
+      const p3 = document.getElementById('action-plan-3')?.value || '';
+
+      appState.actionPlan.change1 = p1;
+      appState.actionPlan.change2 = p2;
+      appState.actionPlan.change3 = p3;
+
+      updatePresentationOutline();
+      recalculateOverallProgress();
+    }
+
+    function updatePresentationOutline() {
+      const box = document.getElementById('presentation-summary-box');
+      if (!box) return;
+
+      const p1 = appState.actionPlan.change1 || '[Planned Change 1: High School to Dual Credit Rigor Integration]';
+      const p2 = appState.actionPlan.change2 || '[Planned Change 2: Digital Systems & Student Accountability]';
+      const p3 = appState.actionPlan.change3 || '[Planned Change 3: Workforce & Industry Pathways Exposure]';
+
+      box.innerHTML = `
+<span class="text-lit-red font-bold">LIT Teacher Externship Finale Presentation Outline &bull; Dec 3rd</span>
+Educator: <span class="text-amber-300 font-bold">${appState.profile.name}</span> (${appState.profile.school})
+Mentor Interaction: <span class="text-blue-300 font-bold">${appState.mentorTimeTotal.toFixed(1)} Hours Logged</span> | Days Active: <span class="text-blue-300 font-bold">${appState.days.filter(d => d.completed).length}/8</span>
+
+<span class="text-slate-400 underline uppercase text-[10px]">Culminating Action Commitments:</span>
+1. INSTRUCTIONAL STRATEGY:
+   &bull; ${p1}
+
+2. STUDENT OWNERSHIP & TECH:
+   &bull; ${p2}
+
+3. CAREER & INDUSTRY PATHWAYS:
+   &bull; ${p3}
+      `;
+    }
+
+    function copyPresentationOutline() {
+      const p1 = appState.actionPlan.change1 || 'Rigor and college instruction alignment';
+      const p2 = appState.actionPlan.change2 || 'Digital systems and LMS accountability';
+      const p3 = appState.actionPlan.change3 || 'Industry certifications and LIT dual credit pathways';
+
+      const text = `LIT EXTERNSHIP FINALE PRESENTATION (Dec 3)
+Educator: ${appState.profile.name}
+School: ${appState.profile.school}
+Mentor Hours: ${appState.mentorTimeTotal.toFixed(1)} / 4.0
+Active Days: ${appState.days.filter(d => d.completed).length}/8
+
+Top 3 Pedagogical Action Commitments:
+1. ${p1}
+2. ${p2}
+3. ${p3}`;
+
+      const tempInput = document.createElement("textarea");
+      tempInput.value = text;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+
+      showToast("Presentation outline copied to clipboard!");
+    }
+
+    function updateEvidenceState() {
+      appState.evidence.lms = document.getElementById('chk-ev-lms').checked;
+      appState.evidence.faculty = document.getElementById('chk-ev-faculty').checked;
+      appState.evidence.support = document.getElementById('chk-ev-support').checked;
+      appState.evidence.tech = document.getElementById('chk-ev-tech').checked;
+
+      recalculateOverallProgress();
+      showToast("Evidence checklist updated.");
+    }
+
+    function recalculateOverallProgress() {
+      // 1. Days completed (Weight: 25%)
+      const completedDaysCount = appState.days.filter(d => d.completed).length;
+      const daysPct = (completedDaysCount / 8) * 25;
+
+      // 2. Mentor Hours completed (Weight: 25%)
+      const hoursPct = Math.min(25, (appState.mentorTimeTotal / 4.0) * 25);
+
+      // 3. Reflections (Weight: 25%)
+      let answeredCount = 0;
+      for (let i = 1; i <= 15; i++) {
+        if (appState.reflections[i] && appState.reflections[i].length > 2) {
+          answeredCount++;
+        }
+      }
+      const reflectionPct = (answeredCount / 15) * 25;
+
+      // 4. Action Plan & Quiz (Weight: 25%)
+      let quizPlanScore = 0;
+      if (appState.actionPlan.change1 && appState.actionPlan.change2) quizPlanScore += 10;
+      if (appState.quizPassed) quizPlanScore += 15;
+
+      const totalPct = Math.round(daysPct + hoursPct + reflectionPct + quizPlanScore);
+
+      // Update UI Header & Bar
+      const pb = document.getElementById('overall-progress-bar');
+      const pt = document.getElementById('overall-percentage');
+      if (pb) pb.style.width = `${totalPct}%`;
+      if (pt) pt.innerText = `${totalPct}%`;
+
+      // Update Badges
+      const badgeDaysText = document.getElementById('badge-days-text');
+      if (badgeDaysText) badgeDaysText.innerText = `${completedDaysCount}/8 Days Logged`;
+
+      const badgeWbText = document.getElementById('badge-wb-text');
+      if (badgeWbText) badgeWbText.innerText = `${answeredCount}/15 Reflections`;
+
+      // Update Dashboard Pillar metrics
+      const dashDaysVal = document.getElementById('dash-days-val');
+      const dashDaysBar = document.getElementById('dash-days-bar');
+      if (dashDaysVal) dashDaysVal.innerText = `${completedDaysCount} / 8`;
+      if (dashDaysBar) dashDaysBar.style.width = `${(completedDaysCount / 8) * 100}%`;
+
+      const dashPlanVal = document.getElementById('dash-plan-val');
+      const dashPlanBar = document.getElementById('dash-plan-bar');
+      if (dashPlanVal) dashPlanVal.innerText = (answeredCount >= 8 && appState.actionPlan.change1) ? 'Synthesized' : 'In Progress';
+      if (dashPlanBar) dashPlanBar.style.width = `${Math.round(((answeredCount / 15) * 0.7 + (appState.actionPlan.change1 ? 0.3 : 0)) * 100)}%`;
+
+      // Enable Certificate if passing criteria met (e.g. Total >= 70% or Quiz passed)
+      const headerCertBadge = document.getElementById('header-cert-badge');
+      if (appState.quizPassed || totalPct >= 80) {
+        if (headerCertBadge) headerCertBadge.classList.remove('hidden');
+      } else {
+        if (headerCertBadge) headerCertBadge.classList.add('hidden');
+      }
+    }
+
+    function handleQuizSubmit(event) {
+      event.preventDefault();
+      const form = document.getElementById('quiz-form');
+      const formData = new FormData(form);
+
+      const q1 = formData.get('q1');
+      const q2 = formData.get('q2');
+      const q3 = formData.get('q3');
+      const q4 = formData.get('q4');
+      const q5 = formData.get('q5');
+
+      const alertBox = document.getElementById('quiz-alert');
+      alertBox.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-red-100', 'text-red-800');
+
+      if (!q1 || !q2 || !q3 || !q4 || !q5) {
+        alertBox.className = "p-3 rounded-lg text-xs font-semibold bg-amber-100 text-amber-900";
+        alertBox.innerText = "Please answer all 5 verification questions to complete your audit.";
+        alertBox.classList.remove('hidden');
+        return;
+      }
+
+      // Check standard criteria
+      const passed = (q1 === '4') && (q2 === 'distributed') && (q3 === 'all') && (q4 === 'blackboard') && (q5 === 'presentation');
+
+      if (passed) {
+        appState.quizPassed = true;
+        alertBox.className = "p-3 rounded-lg text-xs font-semibold bg-emerald-100 text-emerald-800";
+        alertBox.innerHTML = `
+          <div class="flex items-center gap-2">
+            <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i>
+            <span>Congratulations! All program requirements verified (8 days, 4+ hrs mentor time, learning outcomes, Dec 3rd presentation). Your Certificate of Achievement is unlocked!</span>
+          </div>
+        `;
+        document.getElementById('badge-quiz-text').innerText = 'Verified 100%';
+        document.getElementById('badge-quiz').className = 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300';
+
+        recalculateOverallProgress();
+        triggerConfettiCelebration();
+        lucide.createIcons();
+        showToast("Certificate of Completion Unlocked!");
+      } else {
+        alertBox.className = "p-3 rounded-lg text-xs font-semibold bg-red-100 text-red-800";
+        alertBox.innerText = "Some responses did not match program guidelines. Hint: Minimum 4 mentor hours, distributed Oct-Dec window, Blackboard collaboration, and Dec 3 presentation.";
+      }
+    }
+
+    function autoFillPassingQuiz() {
+      const q1 = document.querySelector('input[name="q1"][value="4"]');
+      const q2 = document.querySelector('input[name="q2"][value="distributed"]');
+      const q3 = document.querySelector('input[name="q3"][value="all"]');
+      const q4 = document.querySelector('input[name="q4"][value="blackboard"]');
+      const q5 = document.querySelector('input[name="q5"][value="presentation"]');
+
+      if (q1) q1.checked = true;
+      if (q2) q2.checked = true;
+      if (q3) q3.checked = true;
+      if (q4) q4.checked = true;
+      if (q5) q5.checked = true;
+
+      showToast("Correct audit responses filled. Click Submit to verify.");
+    }
+
+    // Handles typing directly on the certificate recipient name
+    function handleCertNameInput(name) {
+      const cleaned = name.trim();
+      appState.profile.name = cleaned || 'Educator Participant';
+      const inputEl = document.getElementById('input-extern-name');
+      const headerName = document.getElementById('extern-display-name');
+      if (inputEl) inputEl.value = cleaned;
+      if (headerName) headerName.innerText = appState.profile.name;
+      updatePresentationOutline();
+    }
+
+    // Handles typing directly on the certificate school line
+    function handleCertSchoolInput(schoolText) {
+      const cleaned = schoolText.trim();
+      appState.profile.school = cleaned || 'High School Dual Credit';
+      const inputEl = document.getElementById('input-extern-school');
+      if (inputEl) inputEl.value = cleaned;
+      updatePresentationOutline();
+    }
+
+    function updateProfileName(name) {
+      appState.profile.name = name || 'Educator Participant';
+      updateProfileDisplay();
+    }
+
+    function updateProfileSchool(school) {
+      appState.profile.school = school || 'High School Dual Credit';
+      updateProfileDisplay();
+    }
+
+    function updateProfileDisplay() {
+      const headerName = document.getElementById('extern-display-name');
+      const certName = document.getElementById('cert-recipient-name');
+      const certSchool = document.getElementById('cert-recipient-school');
+
+      if (headerName) headerName.innerText = appState.profile.name;
+      if (certName && document.activeElement !== certName) certName.innerText = appState.profile.name;
+      if (certSchool && document.activeElement !== certSchool) certSchool.innerText = `${appState.profile.school} • Career & Technical Education`;
+    }
+
+    function openCertificateModal() {
+      const modal = document.getElementById('certificate-modal');
+      if (modal) modal.classList.remove('hidden');
+
+      // Random credential ID generator for realism
+      const randEl = document.getElementById('cert-random-id');
+      if (randEl && randEl.innerText === '9842') {
+        randEl.innerText = Math.floor(1000 + Math.random() * 9000);
+      }
+
+      // If user hasn't completed quiz, gentle reminder toast
+      if (!appState.quizPassed) {
+        showToast("Note: Take the 5-question audit quiz to verify full completion.");
+      }
+    }
+
+    function closeCertificateModal() {
+      const modal = document.getElementById('certificate-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function triggerConfettiCelebration() {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#002B66', '#0B4EA2', '#C8102E', '#D97706']
+        });
+      }
+    }
+
+    let toastTimeout;
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toast-message');
+      if (!toast || !toastMessage) return;
+
+      toastMessage.innerText = message;
+      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(hideToast, 3500);
+    }
+
+    function hideToast() {
+      const toast = document.getElementById('toast');
+      if (!toast) return;
+      toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+      toast.classList.remove('translate-y-0', 'opacity-100');
+    }
+  </script>
+
+</body></html>
